@@ -7,22 +7,39 @@
 </head>
 <body>
 	<div class="exercise">
-	<div class="vars">
-		<var id="CARBONS">randRange( 1, 10 )</var>
-		<var id="NAME">["meth", "eth", "prop", "but", "pent", "hex", "sept", "oct", "non", "dec"][CARBONS-1]</var>
-	</div>
+		<div class="vars">
+			<var id="CARBONS">randRange( 1, 10 )</var>
+			<var id="HYDROGENS">CARBONS*2+2</var>
+			<var id="NAME">["meth", "eth", "prop", "but", "pent", "hex", "sept", "oct", "non", "dec"][CARBONS-1]</var>
+		</div>
 
-	<div class="problems">
-		<div>
-			<div class="question">
-				How many carbon atoms does <var>NAME</var>ane have?
+		<div class="problems">
+			<div id="carbon_count">
+				<div class="question">
+					How many carbon atoms does <var>NAME</var>ane have?
+				</div>
+				<div class="solution" data-forms="integer"><var>CARBONS</var></div>
+				<div class="hints">
+					<p>The prefix "<var>NAME</var>-" means <var>CARBONS</var>.</p>
+				</div>
 			</div>
-			<div class="solution" data-forms="integer"><var>CARBONS</var></div>
-			<div class="hints">
-				<p>The prefix <var>NAME</var>- means <var>CARBONS</var.</p>
+		
+			<div id="carbon_count">
+				<div class="question">
+					How many hydrogen atoms does <var>NAME</var>ane have?
+				</div>
+				<div class="solution" data-forms="integer"><var>HYDROGENS</var></div>
+				<div class="hints">
+					<p>The molecule <var>NAME</var>ane contains <var>CARBONS</var> carbon atoms.</p>
+					<p>Each carbon atom is bonded to four other atoms.</p>
+					<p data-if="CARBONS === 1">The carbon atom in methane is therefore bound to 4 hydrogen atoms.</p>
+					<p data-if="CARBONS === 2">Each carbon atom in ethane is therefore bound to 3 hydrogen atoms, giving a total of 6 hydrogen atoms.</p>
+					<p data-if="CARBONS > 2">Therefore, the 2 carbons at the end of the <var>NAME</var>ane chain are bound to 2 hydrogen atoms
+					   and the other <var>CARBONS-2</var> carbon atoms are bound to 2 hydrogen atoms each.<br/>
+					   (2 x 3 hydrogen atoms) + (<var>CARBONS-2</var> x 2 hydrogen atoms) = <var>HYDROGENS</var> hydrogen atoms.</p>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
