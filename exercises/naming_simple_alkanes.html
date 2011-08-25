@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html data-require="math graphie">
+<head>
+	<meta charset="UTF-8" />
+	<title>Naming simple alkanes</title>
+	<script src="../khan-exercise.js"></script>
+</head>
+<body>
+	<div class="exercise">
+	<div class="vars">
+		<var id="CARBONS">randRange( 2, 10 )</var>
+		<var id="NAME">["meth", "eth", "prop", "but", "pent", "hex", "sept", "oct", "non", "dec"][CARBONS-1]</var>
+	</div>
+
+	<div class="problems">
+		<div>
+			<div class="question">
+				Name this alkane with <var>CARBONS</var> carbons (<var>NAME</var>ane).
+				<div class="graphie">
+					init({
+						range: [ [0, 12], [-2, 2] ]
+					});
+
+					path([ [1, 0], [2, 1], [3, 0], [4, 1] ]);
+				</div>
+			</div>
+			<div class="solution" data-forms="integer"><var>CARBONS</var></div>
+			<div class="hints"></div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
