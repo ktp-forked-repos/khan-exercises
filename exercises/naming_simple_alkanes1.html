@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html data-require="math graphie">
+<head>
+	<meta charset="UTF-8" />
+	<title>Naming simple alkanes</title>
+	<script src="../khan-exercise.js"></script>
+</head>
+<body>
+	<div class="exercise">
+	<div class="vars">
+		<var id="CARBONS">randRange( 1, 10 )</var>
+		<var id="NAME">["meth", "eth", "prop", "but", "pent", "hex", "sept", "oct", "non", "dec"][CARBONS-1]</var>
+	</div>
+
+	<div class="problems">
+		<div>
+			<div class="question">
+				How many carbon atoms does <var>NAME</var>ane have?
+			</div>
+			<div class="solution" data-forms="integer"><var>CARBONS</var></div>
+			<div class="hints">
+				<p>The prefix <var>NAME</var>- means <var>CARBONS</var.</p>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
