@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html data-require="math chemistry">
+<head>
+	<meta charset="UTF-8" />
+	<title>Ionization energies within a group</title>
+	<script src="../khan-exercise.js"></script>
+</head>
+<body>
+	<div class="exercise">
+		<div class="vars" >
+			<var id="GROUP">rand(8)+1</var>
+			<var id="ELEMENT1">randElementFromGroup( GROUP )</var>
+			<div data-ensure="ELEMENT1 != ELEMENT2">
+				<var id="ELEMENT2">randElementFromGroup( GROUP )</var>
+			</div>
+		</div>
+
+		<div class="problems">
+			<div>
+				<p class="problems">Both <var>ELEMENT1.fullname</var> (atomic number <var>ELEMENT1.protons</var>) and <var>ELEMENT2.fullname</var> (atomic number <var>ELEMENT2.protons</var>) are in group <var>GROUP</var>.</p>
+				<p class="question">Which has the greater ionization energy?</p>
+				<p class="solution" data-forms="integer"><var>MASS</var></p>
+			</div>
+		</div>
+
+		<div class="hints">
+			<p>The mass of a neutron is <code>1</code>, the mass of a proton is <code>1</code> and the mass of an electron is so small it can be ignored.</p>
+			<p>Thus, the total mass of this atom of <var>ELEMENT.fullname</var> is <code><var>NEUTRONS</var> + <var>PROTONS</var> = <var>MASS</var></code>.</p>
+		</div>
+	</div>
+</body>
+</html>

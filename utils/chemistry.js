@@ -42,12 +42,19 @@ var group5 = [ N, P ];
 var group6 = [ O, S ];
 var group7 = [ F, Cl, Br ];
 var group8 = [ He, Ne, Ar, Kr ];
+
+var periodic_groups = [ group1, group2, group3, group4, group5, group6, group7, group8 ];
 var elements = [ H ].concat( group1, group2, group3, group4, group5, group6, group7, group8 );
 
 jQuery.extend(KhanUtil, {
 	// Get a random element
 	randElement: function( ) {
 		return KhanUtil.randFromArray( elements );
+	},
+	
+	// Get a random element from a specific group in periodic table
+	randElementFromGroup: function( n ) {
+		return KhanUtil.randFromArray(  periodic_groups[ n - 1 ] );
 	}
 } );
 
