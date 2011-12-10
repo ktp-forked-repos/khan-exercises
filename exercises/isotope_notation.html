@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html data-require="math chemistry graphie">
+<head>
+	<meta charset="UTF-8" />
+	<title>Understanding isotope notation</title>
+	<script src="../khan-exercise.js"></script>
+</head>
+<body>
+	<div class="exercise">
+		<div class="vars" >
+			<var id="ELEMENT">randElement()</var>
+			<var id="NEUTRONS">randFromArray(ELEMENT.neutrons)</var>
+			<var id="MASS">ELEMENT.protons + NEUTRONS</var>
+		</div>
+
+		<div class="problems">
+			<div>
+				<p class="problems">How many neutrons in this isotope of <var>ELEMENT.fullname</var>?</p>
+				<div class="question">
+					<div class="graphie">
+						init({
+							range: [ [0, 8], [-1, 1] ]
+						});
+
+						label( [2, 0.3],
+							"\\Huge{ <var>ELEMENT.symbol</var> }",
+							"right" );
+						label( [1.5, 0],
+							"<var>ELEMENT.protons</var>",
+							"right" );
+						label( [1.5, 0.6],
+							"<var>MASS</var>",
+							"right" );
+					</div>
+				</div>
+				<p class="solution" data-forms="integer"><var>PROTONS</var></p>
+			</div>
+		</div>
+
+		<div class="hints">
+			<p>The atomic number is the number of protons an atom has.</p>
+			<p>Thus, the atomic number of <var>ELEMENT.fullname</var> is <code><var>PROTONS</var></code>.</p>
+		</div>
+	</div>
+</body>
+</html>
