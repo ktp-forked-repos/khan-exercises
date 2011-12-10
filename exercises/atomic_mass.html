@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-require="math">
+<html data-require="math chemistry">
 <head>
 	<meta charset="UTF-8" />
 	<title>Atomic mass</title>
@@ -8,20 +8,17 @@
 <body>
 	<div class="exercise">
 		<div class="vars" >
-			<var id="PROTONS">randRange( 1, 88 )</var>
-			<div data-ensure="NEUTRONS > 0">
-				<var id="NEUTRONS">PROTONS + randRange( -10, 10 )</var>
-			</div>
-			<div data-ensure="ELECTRONS > 0">
-				<var id="ELECTRONS">PROTONS + randRange( -4, 4 )</var>
-			</div>
-			<var id="PARTIClES">shuffle( [ PROTONS + " protons", NEUTRONS + " neutrons", ELECTRONS + " electrons"] )</var>
+			<var id="ELEMENT">randElement()</var>
+			<var id="PROTONS">ELEMENT.protons</var>
+			<var id="NEUTRONS">ELEMENT.neutrons[0]</var>
+			<var id="ELECTRONS">ELEMENT.protons</var>
+			<var id="PARTICLES">shuffle( [ PROTONS + " protons", NEUTRONS + " neutrons", ELECTRONS + " electrons"] )</var>
 			<var id="MASS">PROTONS + NEUTRONS</var>
 		</div>
 
 		<div class="problems">
 			<div>
-				<p class="problems">An atom consists of <var>PARTIClES[0]</var> , <var>PARTIClES[1]</var> and <var>PARTIClES[2]</var>.</p>
+				<p class="problems">An atom of <var>ELEMENT.fullname</var> consists of <var>PARTICLES[0]</var> , <var>PARTICLES[1]</var> and <var>PARTICLES[2]</var>.</p>
 				<p class="question">What is the mass of this atom?</p>
 				<p class="solution" data-forms="integer"><var>MASS</var></p>
 			</div>
