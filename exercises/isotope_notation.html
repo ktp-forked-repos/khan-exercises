@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="problems">
-			<div>
+			<div class="count-neutrons">
 				<p class="problems">How many neutrons in this isotope of <var>ELEMENT.fullname</var>?</p>
 				<div class="question">
 					<div class="graphie">
@@ -33,13 +33,43 @@
 							"right" );
 					</div>
 				</div>
-				<p class="solution" data-forms="integer"><var>PROTONS</var></p>
+				<p class="solution" data-forms="integer"><var>NEUTRONS</var></p>
+				
+				<div class="hints">
+					<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
+					<p>The number of neutron is equal to the atomic mass minus the number of atomic number</p>
+					<p>Thus, the mass of this isotope of <var>ELEMENT.fullname</var> is <code><var>MASS</var></code>.</p>
+				</div>
+				
 			</div>
-		</div>
+			
+			<div class="count-protons">
+				<p class="problems">How many protons in this isotope of <var>ELEMENT.fullname</var>?</p>
+				<div class="question">
+					<div class="graphie">
+						init({
+							range: [ [0, 8], [-1, 1] ]
+						});
 
-		<div class="hints">
-			<p>The atomic number is the number of protons an atom has.</p>
-			<p>Thus, the atomic number of <var>ELEMENT.fullname</var> is <code><var>PROTONS</var></code>.</p>
+						label( [2, 0.3],
+							"\\Huge{ <var>ELEMENT.symbol</var> }",
+							"right" );
+						label( [1.5, 0],
+							"<var>ELEMENT.protons</var>",
+							"right" );
+						label( [1.5, 0.6],
+							"<var>MASS</var>",
+							"right" );
+					</div>
+				</div>
+				<p class="solution" data-forms="integer"><var>ELEMENT.protons</var></p>
+			</div>
+			
+			<div class="hints">
+				<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
+				<p>The number of protons is equal to the atomic number, thus the number of protons in this isotope of <var>ELEMENT.fullname</var> is <code><var>ELEMENT.protons</var></code>.</p>
+			</div>
+			
 		</div>
 	</div>
 </body>
