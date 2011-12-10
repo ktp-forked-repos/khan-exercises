@@ -10,7 +10,7 @@
 		<div class="vars" >
 			<var id="ELEMENT">randElement()</var>
 			<var id="PROTONS">ELEMENT.protons</var>
-			<var id="NEUTRONS">ELEMENT.neutrons[0]</var>
+			<var id="NEUTRONS">randFromArray(ELEMENT.neutrons)</var>
 			<div data-ensure="ELECTRONS > 0">
 				<var id="ELECTRONS">PROTONS + randRange( -4, 4 )</var>
 			</div>
