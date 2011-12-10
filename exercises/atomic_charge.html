@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-require="math">
+<html data-require="math chemistry">
 <head>
 	<meta charset="UTF-8" />
 	<title>Atomic charge</title>
@@ -8,20 +8,19 @@
 <body>
 	<div class="exercise">
 		<div class="vars" >
-			<var id="PROTONS">randRange( 1, 88 )</var>
-			<div data-ensure="NEUTRONS > 0">
-				<var id="NEUTRONS">PROTONS + randRange( -10, 10 )</var>
-			</div>
+			<var id="ELEMENT">randElement()</var>
+			<var id="PROTONS">ELEMENT.protons</var>
+			<var id="NEUTRONS">ELEMENT.neutrons[0]</var>
 			<div data-ensure="ELECTRONS > 0">
 				<var id="ELECTRONS">PROTONS + randRange( -4, 4 )</var>
 			</div>
-			<var id="PARTIClES">shuffle( [ PROTONS + " protons", NEUTRONS + " neutrons", ELECTRONS + " electrons"] )</var>
+			<var id="PARTICLES">shuffle( [ PROTONS + " protons", NEUTRONS + " neutrons", ELECTRONS + " electrons"] )</var>
 			<var id="CHARGE">PROTONS - ELECTRONS</var>
 		</div>
 
 		<div class="problems">
 			<div>
-				<p class="problems">An atom consists of <var>PARTIClES[0]</var> , <var>PARTIClES[1]</var> and <var>PARTIClES[2]</var>.</p>
+				<p class="problems">An atom of <var>ELEMENT.fullname</var> consists of <var>PARTICLES[0]</var>, <var>PARTICLES[1]</var> and <var>PARTICLES[2]</var>.</p>
 				<p class="question">What is the charge of this atom?</p>
 				<p class="solution" data-forms="integer"><var>CHARGE</var></p>
 			</div>
@@ -29,7 +28,7 @@
 
 		<div class="hints">
 			<p>The charge of a neutron is <code>0</code>, the charge of a proton is <code>+1</code> and the charge of an electron is <code>-1</code>.</p>
-			<p>The atom therefore consists of <code><var>PROTONS</var></code> positive charges and  <code><var>ELECTRONS</var></code> negative charges.</p>
+			<p>This atom therefore consists of <code><var>PROTONS</var></code> positive charges and  <code><var>ELECTRONS</var></code> negative charges.</p>
 			<p>Thus, the overall charge of this atom is <code><var>PROTONS</var> * 1 + <var>ELECTRONS</var>*-1 = <var>CHARGE</var></code>.</p>
 		</div>
 	</div>

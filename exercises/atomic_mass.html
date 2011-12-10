@@ -11,22 +11,25 @@
 			<var id="ELEMENT">randElement()</var>
 			<var id="PROTONS">ELEMENT.protons</var>
 			<var id="NEUTRONS">ELEMENT.neutrons[0]</var>
-			<var id="ELECTRONS">ELEMENT.protons</var>
+			<div data-ensure="ELECTRONS > 0">
+				<var id="ELECTRONS">PROTONS + randRange( -4, 4 )</var>
+			</div>
 			<var id="PARTICLES">shuffle( [ PROTONS + " protons", NEUTRONS + " neutrons", ELECTRONS + " electrons"] )</var>
+			
 			<var id="MASS">PROTONS + NEUTRONS</var>
 		</div>
 
 		<div class="problems">
 			<div>
 				<p class="problems">An atom of <var>ELEMENT.fullname</var> consists of <var>PARTICLES[0]</var>, <var>PARTICLES[1]</var> and <var>PARTICLES[2]</var>.</p>
-				<p class="question">What is the mass of this atom?</p>
+				<p class="question">What is the atomic mass of this atom?</p>
 				<p class="solution" data-forms="integer"><var>MASS</var></p>
 			</div>
 		</div>
 
 		<div class="hints">
-			<p>The mass of a neutron is <code>1</code>, the mass of a proton is <code>1</code> and the charge of an electron is so small it can be ignored.</p>
-			<p>Thus, the total mass of this atom is <code><var>NEUTRONS</var> + <var>PROTONS</var> = <var>MASS</var></code>.</p>
+			<p>The mass of a neutron is <code>1</code>, the mass of a proton is <code>1</code> and the mass of an electron is so small it can be ignored.</p>
+			<p>Thus, the total mass of this atom of <var>ELEMENT.fullname</var> is <code><var>NEUTRONS</var> + <var>PROTONS</var> = <var>MASS</var></code>.</p>
 		</div>
 	</div>
 </body>
