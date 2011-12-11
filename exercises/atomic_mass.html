@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-require="math chemistry">
+<html data-require="math chemistry word-problems">
 <head>
 	<meta charset="UTF-8" />
 	<title>Atomic mass</title>
@@ -14,7 +14,7 @@
 			<div data-ensure="ELECTRONS > 0">
 				<var id="ELECTRONS">PROTONS + randRange( -4, 4 )</var>
 			</div>
-			<var id="PARTICLES">shuffle( [ PROTONS + " protons", NEUTRONS + " neutrons", ELECTRONS + " electrons"] )</var>
+			<var id="PARTICLES">shuffle( [ plural( PROTONS, "proton" ), plural( NEUTRONS, "neutron" ), plural( ELECTRONS, "electron" ) ] )</var>
 			
 			<var id="MASS">PROTONS + NEUTRONS</var>
 		</div>
