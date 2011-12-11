@@ -13,13 +13,13 @@
 		<var id="M">randRange(2, 3)</var>
 		<var id="C">A * M</var>
 		<var id="D">B * M</var>
+		<var id="SYMBOL">binop( 1 )</var>
 	</div>
 
 	<div class="problems">
 		<div>
-			<div class="question">
-				<p><code>\dfrac{<var>A</var>}{<var>B</var>} = \dfrac{?}{<var>D</var>}</code></p>
-			</div>
+			<p class="question">What number could replace <code><var>SYMBOL</var></code> below?</p>
+			<p><code>\dfrac{<var>A</var>}{<var>B</var>} = \dfrac{<var>SYMBOL</var>}{<var>D</var>}</code></p>
 			<div class="solution" data-forms="integer"><var>C</var></div>
 			<div class="hints">
 				<div>
@@ -45,13 +45,18 @@
 				</div>
 				<p><code>\dfrac{<var>A</var>}{<var>B</var>} = \dfrac{<var>C</var>}{<var>D</var>}</code> and so the answer is <code><var>C</var></code>.</p>
 
+				<div>
+					<p>Another way to get the answer is to multiply by <code>\dfrac{<var>M</var>}{<var>M</var>}</code>.</p>
+					<p><code>\dfrac{<var>M</var>}{<var>M</var>} = \dfrac{1}{1} = 1</code> so really we are multiplying by 1.</p>
+				</div>
+				<p>The final equation is: <code>\dfrac{<var>A</var>}{<var>B</var>} \times \dfrac{<var>M</var>}{<var>M</var>} = \dfrac{<var>C</var>}{<var>D</var>} </code> so our answer is <code><var>C</var></code>.</p>
+
 			</div>
 		</div>
 
 		<div>
-			<div class="question">
-				<p><code>\dfrac{<var>A</var>}{<var>B</var>} = \dfrac{<var>C</var>}{?}</code></p>
-			</div>
+			<p class="question">What number could replace <code><var>SYMBOL</var></code> below?</p>
+			<p><code>\dfrac{<var>A</var>}{<var>B</var>} = \dfrac{<var>C</var>}{<var>SYMBOL</var>}</code></p>
 			<div class="solution" data-forms="integer"><var>D</var></div>
 			<div class="hints">
 				<div>
@@ -77,8 +82,15 @@
 						rectchart( [C, D - C], ["#e00", "#999"] );
 					</div>
 				</div>
-
 				<p><code>\dfrac{<var>A</var>}{<var>B</var>} = \dfrac{<var>C</var>}{<var>D</var>}</code> and so the answer is <code><var>D</var></code>.</p>
+
+				<div>
+					<p>Another way to get the answer is to multiply by <code>\dfrac{<var>M</var>}{<var>M</var>}</code>.</p>
+					<p><code>\dfrac{<var>M</var>}{<var>M</var>} = \dfrac{1}{1} = 1</code> so really we are multiplying by 1.</p>
+				</div>
+
+				<p>The final equation is: <code>\dfrac{<var>A</var>}{<var>B</var>} \times \dfrac{<var>M</var>}{<var>M</var>} = \dfrac{<var>C</var>}{<var>D</var>} </code> so our answer is <code><var>D</var></code>.</p>
+
 			</div>
 		</div>
 	</div>

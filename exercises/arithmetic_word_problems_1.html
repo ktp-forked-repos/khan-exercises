@@ -17,13 +17,13 @@
 
 			<div id="take-away-result">
 				<p class="problem">
-					There <var>plural('was', TOTAL)</var> <var>plural(TOTAL, 'person')</var> riding on a train.
-					At the previous stop, <var>plural(NUM2, 'person')</var> got off.
+					Before the previous stop there <var>plural('was', TOTAL)</var> <var>plural(TOTAL, 'person')</var> riding on a train.
+					<var>plural(NUM2, 'person')</var> ended up getting off at the stop.
 				</p>
 				<p class="question">
 					How many people are riding the train now?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM1</var>
 				</p>
 				<div class="hints">
@@ -34,7 +34,7 @@
 					The difference is <code><var>TOTAL</var> - <var>NUM2</var></code> <var>plural('person')</var> on the train.
 					</p>
 					<p>
-					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('person')</var> <var>plural('is', NUM1)</var> on the train.
+					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('person', NUM1)</var> <var>plural('is', NUM1)</var> on the train.
 					</p>
 				</div>
 			</div>
@@ -42,12 +42,12 @@
 			<div id="take-away-start">
 				<p class="problem">
 					There <var>plural('is', NUM1)</var> <var>plural(NUM1, 'person')</var> riding on a train.
-					At the previous stop <var>plural(NUM2, 'person')</var> got off.
+					At the previous stop, <var>plural(NUM2, 'person')</var> got off.
 				</p>
 				<p class="question">
 					How many people were riding the train before the stop?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>TOTAL</var>
 				</p>
 				<div class="hints">
@@ -58,20 +58,20 @@
 					The sum is <code><var>NUM1</var> + <var>NUM2</var></code> <var>plural('person')</var> on the train.
 					</p>
 					<p>
-					<code><var>NUM1</var> + <var>NUM2</var> = <var>TOTAL</var></code> <var>plural('person')</var> <var>plural('is', NUM1)</var> on the train.
+					<code><var>NUM1</var> + <var>NUM2</var> = <var>TOTAL</var></code> <var>plural('person')</var> <var>plural('is', TOTAL)</var> on the train.
 					</p>
 				</div>
 			</div>
 
 			<div id="take-away-change">
 				<p class="problem">
-					There <var>plural('was', TOTAL)</var> <var>plural(TOTAL, 'person')</var> riding on a train, before the previous stop.
-					Now there are <var>plural(NUM2, 'person')</var> riding on the train.
+					There <var>plural('was', TOTAL)</var> <var>plural(TOTAL, 'person')</var> riding on a train before it stopped and some number of people got off.
+					Now there <var>plural('is', NUM2)</var> <var>plural(NUM2, 'person')</var> riding on the train.
 				</p>
 				<p class="question">
 					How many people got off the train at the stop?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM1</var>
 				</p>
 				<div class="hints">
@@ -82,7 +82,7 @@
 					The difference is <code><var>TOTAL</var> - <var>NUM2</var></code> <var>plural('person')</var>.
 					</p>
 					<p>
-					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('person')</var> <var>plural('is', NUM1)</var>.
+					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('person', NUM1)</var> got off.
 					</p>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 				<p class="question">
 					How many trees are on the banks of the river?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>TOTAL</var>
 				</p>
 				<div class="hints">
@@ -117,7 +117,7 @@
 				<p class="question">
 					How many trees are on the <var>side(2)</var> bank of the river?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM1</var>
 				</p>
 				<div class="hints">
@@ -128,7 +128,7 @@
 					The difference is <code><var>TOTAL</var> - <var>NUM2</var></code> <var>plural('tree')</var>.
 					</p>
 					<p>
-					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('tree')</var>.
+					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('tree', NUM1)</var>.
 					</p>
 				</div>
 			</div>
@@ -142,7 +142,7 @@
 				<p class="question">
 					How many cars were parked at the <var>store(1)</var> store at the beginning?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM1</var>
 				</p>
 				<div class="hints">
@@ -153,31 +153,29 @@
 					The difference is <code><var>TOTAL</var> - <var>NUM2</var></code> <var>plural('car')</var>.
 					</p>
 					<p>
-					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('car')</var>.
+					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('car', NUM1)</var>.
 					</p>
 				</div>
 			</div>
 
 			<div id="add-change">
 				<p class="problem">
-					There <var>plural('was', NUM2)</var> <var>plural(NUM2, 'car')</var> parked in the <var>store(1)</var> store parking lot.
-					Some more cars park at the <var>store(1)</var> store, and now there <var>plural('is', TOTAL)</var> <var>plural(TOTAL, 'car')</var> in the parking lot.
+					Initially there <var>plural( 'was', NUM2 )</var> <var>plural( NUM2, 'car' )</var> parked in the <var>store(1)</var> store parking lot.
+					During the following <var>randRange( 2, 3 )</var> hours some more cars parked at the <var>store(1)</var> store, and now there <var>plural('is', TOTAL)</var> <var>plural(TOTAL, 'car')</var> in the parking lot. No cars left the parking lot during this time.
 				</p>
 				<p class="question">
-					How many more cars parked at the <var>store(1)</var> store?
+				How many cars parked in the <var>store( 1 )</var> store parking lot after the initial <var>plural( NUM2, 'car' )</var>?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM1</var>
 				</p>
 				<div class="hints">
-					<p>
-					The number of cars that came and parked at the store is the difference between the number that were parked earlier and the number that are parked now.
-					</p>
+					<p>The number of cars that came and parked at the store is the difference between the number that were parked earlier and the number that are parked now.</p>
 					<p>
 					The difference is <code><var>TOTAL</var> - <var>NUM2</var></code> <var>plural('car')</var>.
 					</p>
 					<p>
-					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('car')</var>.
+					<code><var>TOTAL</var> - <var>NUM2</var> = <var>NUM1</var></code> <var>plural('car', NUM1)</var>.
 					</p>
 				</div>
 			</div>
@@ -190,7 +188,7 @@
 				<p class="question">
 					How many cars are in the parking lot now?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>TOTAL</var>
 				</p>
 				<div class="hints">
@@ -214,7 +212,7 @@
 				<p class="question">
 					How many more <var>plural(exercise(1))</var> did <var>person(1)</var> do than <var>person(2)</var>?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM1</var>
 				</p>
 				<div class="hints">
@@ -244,7 +242,7 @@
 				<p class="question">
 					How many <var>plural(exercise(1))</var> did <var>person(1)</var> do?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>TOTAL</var>
 				</p>
 				<div class="hints">
@@ -275,7 +273,7 @@
 				<p class="question">
 					How many <var>plural(exercise(1))</var> did <var>person(2)</var> do?
 				</p>
-				<p class="solution">
+				<p class="solution" data-forms="integer">
 					<var>NUM2</var>
 				</p>
 				<div class="hints">
@@ -286,7 +284,7 @@
 					The difference is <code><var>TOTAL</var> - <var>NUM1</var></code> <var>plural(exercise(1))</var>.
 					</p>
 					<p>
-					<var>He(1)</var> did <code><var>TOTAL</var> - <var>NUM1</var> = <var>NUM2</var></code> <var>plural(exercise(1))</var>.
+					<var>He(1)</var> did <code><var>TOTAL</var> - <var>NUM1</var> = <var>NUM2</var></code> <var>plural(exercise(1), NUM2)</var>.
 					</p>
 				</div>
 			</div>

@@ -20,13 +20,13 @@
 
 					<div class="problem">
 						<p>Identify this conic section.</p>
-						
+
 						<div class="graphie" id="conic">
 							graphInit({
 								range: 10,
 								scale: 20,
 								tickStep: 1,
-								axisArrows: "<->"
+								axisArrows: "&lt;-&gt;"
 							});
 							style({ stroke: "#6495ED" });
 						</div>
@@ -54,10 +54,10 @@
 				<div id="ellipse" data-type="parabola">
 					<div class="vars">
 						<var id="A">randRangeNonZero( -70, 70 ) / 10</var>
-						<var id="B">randRangeNonZero( -70, 70 ) / 10</var>
+						<var id="B" data-ensure="abs( abs( A ) - abs( B ) ) > 1">randRangeNonZero( -70, 70 ) / 10</var>
 						<var id="C">randRangeNonZero( -30, 30 ) / 10</var>
 						<var id="D">randRangeNonZero( -30, 30 ) / 10</var>
-						
+
 						<var id="PARA_FUNC">function( t ) {
 							return [ A * cos( t ) + C, B * sin( t ) + D ];
 						}</var>
@@ -78,9 +78,9 @@
 				</div>
 
 				<div id="circle" data-type="ellipse">
-					<div class="vars" data-ensure="A === B">
+					<div class="vars" data-ensure="A > 0.5">
 						<var id="A">randRangeNonZero( -70, 70 ) / 10</var>
-						<var id="B">randRangeNonZero( -70, 70 ) / 10</var>
+						<var id="B">A</var>
 					</div>
 
 					<div class="solution">Circle</div>
@@ -100,7 +100,7 @@
 							return [ A / cos( t ), B * tan( t ) ];
 						}</var>
 					</div>
-					
+
 					<div class="question">
 						<div class="graphie" data-update="conic">
 							// to steer clear of discontinuities,

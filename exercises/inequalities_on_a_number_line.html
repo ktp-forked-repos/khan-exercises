@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-require="math graphie graphie-helpers">
+<html data-require="math math-format graphie graphie-helpers">
 <head>
 	<meta charset="UTF-8" />
 	<title>Inequalities on a number line</title>
@@ -44,7 +44,14 @@
 						break;
 
 					case "quantity":
-						i += KhanUtil.randRangeNonZero( -3, 3 )
+						var original = i;
+
+						while (Math.abs(original) == Math.abs(i)) {
+							// The only quantity mistake we don't allow is a perfect reflection around the origin,
+							// b/c it may combine with a positivity mistake to create a correct answer.
+							i += KhanUtil.randRangeNonZero( -3, 3 )
+						}
+
 						break;
 
 				}
@@ -98,11 +105,11 @@
 			<var id="FRAC">rand( 3 ) > 0 ? (randRange( 1, 9 ) / 10) : 0</var>
 		</div>
 
-		<var id="SIGN">randFromArray(["", "-"])</var>
+		<var id="SIGN">(INT === 0 ? "" : randFromArray(["", "-"]))</var>
 		<var id="REL">randFromArray([ "&lt;", "&gt;", "&le;", "&ge;" ])</var>
 		<var id="INCLUSIVE">REL == "&le;" || REL == "&ge;"</var>
 		<var id="LESS_THAN">REL == "&lt;" || REL == "&le;"</var>
-		<var id="VARIABLE_NAME">randFromArray([ "a", "b", "c", "x", "y", "z" ])</var>
+		<var id="VARIABLE_NAME">randVar()</var>
 		<var id="LINE_ERROR_TYPES">shuffle([ "direction", "inclusion", "positivity", "quantity", "none" ])</var>
 		<var id="CORRECT_LINE_INDEX">jQuery.inArray( "none", LINE_ERROR_TYPES )</var>
 		<var id="LINE_LABELS">[ "A", "B", "C", "D", "E" ]</var>
@@ -115,8 +122,6 @@
 				<p>Which graph on the number line represents <code class="hint_blue"><var>VARIABLE_NAME</var> <var>REL</var> <var>SIGN + ( INT + FRAC )</var></code>?</p>
 
 				<div class="graphie" data-each="LINE_LABELS as index, label">
-					var index = <var>index</var>;
-					var label = "<var>label</var>";
 					numberLineWithArrowAndMistakes(
 						label, SIGN, INT, FRAC, LESS_THAN, INCLUSIVE, LINE_ERROR_TYPES, index
 					);
@@ -131,7 +136,7 @@
 			</ol>
 
 			<div class="hints">
-				
+
 				<p>First, draw a number line with at least a few numbers on each side of <code><var>SIGN + ( INT + FRAC )</var></code>.</p>
 				<div class="graphie" id="number_line_hint">
 
@@ -187,19 +192,19 @@
 			<div class="hints">
 
 				<p data-if="LESS_THAN">
-					The arrow is pointing to the left of <code><var>INT</var></code>, so everything less than <var>INT</var> is included.
+					The arrow is pointing to the left of <code><var>SIGN + INT</var></code>, so everything less than <code><var>SIGN + INT</var></code> is included.
 				</p><p data-else>
-					The arrow is pointing to the right of <code><var>INT</var></code>, so everything greater than <var>INT</var> is included.
+					The arrow is pointing to the right of <code><var>SIGN + INT</var></code>, so everything greater than <code><var>SIGN + INT</var></code> is included.
 				</p>
 
 				<p data-if="INCLUSIVE">
-					The circle is filled in, so <code><var>INT</var></code> itself is also included.
+					The circle is filled in, so <code><var>SIGN + INT</var></code> itself is also included.
 				</p><p data-else>
-					The circle is not filled in, so <code><var>INT</var></code> itself is not included.
+					The circle is not filled in, so <code><var>SIGN + INT</var></code> itself is not included.
 				</p>
 
 				<p>
-					<code class="hint_blue"><var>VARIABLE_NAME</var> <var>REL</var> <var>INT</var></code>
+					<code class="hint_blue"><var>VARIABLE_NAME</var> <var>REL</var><var>SIGN + INT</var></code>
 				</p>
 			</div>
 		</div>

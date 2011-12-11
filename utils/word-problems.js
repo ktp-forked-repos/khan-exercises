@@ -12,11 +12,11 @@ jQuery.extend( KhanUtil, {
 			conjunction = "and";
 		}
 
-		if ( array.length == 0 ) {
+		if ( array.length === 0 ) {
 			return "";
-		} else if ( array.length == 1 ) {
+		} else if ( array.length === 1 ) {
 			return array[0];
-		} else if ( array.length == 2 ) {
+		} else if ( array.length === 2 ) {
 			return array[0] + " " + conjunction + " " + array[1];
 		} else {
 			return array.slice(0, -1).join(", ") + ", " + conjunction + " " + array[ array.length - 1 ];
@@ -44,7 +44,8 @@ jQuery.extend( KhanUtil, {
 			'person': 'people',
 			'is': 'are',
 			'was': 'were',
-			'square foot': 'square feet'
+			'square foot': 'square feet',
+			'tomato': 'tomatoes'
 		};
 
 		var pluralizeWord = function(word) {
@@ -54,12 +55,13 @@ jQuery.extend( KhanUtil, {
 
 			// determine if our word is all caps.  If so, we'll need to
 			// re-capitalize at the end
-			var isUpperCase = (word.toUpperCase() == word);
+			var isUpperCase = (word.toUpperCase() === word);
 			var oneOff = oneOffs[word.toLowerCase()];
 			var words = word.split(/\s+/);
 
 			// first handle simple one-offs
-			if ( oneOff ) {
+			// ({}).watch is a function in Firefox, blargh
+			if ( typeof oneOff === "string" ) {
 				return oneOff;
 			}
 
@@ -67,7 +69,7 @@ jQuery.extend( KhanUtil, {
 			else if ( words.length > 1 ) {
 				// for 3-word phrases where the middle word is 'in' or 'of',
 				// pluralize the first word
-				if ( words.length == 3 && /\b(in|of)\b/i.test(words[1]) ) {
+				if ( words.length === 3 && /\b(in|of)\b/i.test(words[1]) ) {
 					words[0] = KhanUtil.plural( words[0] );
 				}
 
@@ -119,7 +121,7 @@ jQuery.extend( KhanUtil, {
 
 				return value + " " + arg1;
 			} else if ( typeof value === "string" ) {
-				var plural = pluralizeWord(value)
+				var plural = pluralizeWord(value);
 				if ( typeof arg1 === "string" && arguments.length === 3 ) {
 					plural = arg1;
 					arg1 = arg2;
@@ -272,10 +274,83 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 		"rubber stamp"
 	]);
 
+	var colors = KhanUtil.shuffle([
+		"red",
+		"orange",
+		"yellow",
+		"green",
+		"blue",
+		"purple",
+		"white",
+		"black",
+		"brown",
+		"silver",
+		"gold",
+		"pink"
+	]);
+
+	var schools = KhanUtil.shuffle([
+		"Loyola",
+		"Gardner Bullis",
+		"Almond",
+		"Covington",
+		"Springer",
+		"Santa Rita",
+		"Oak"
+	]);
+
+	var clothes = KhanUtil.shuffle([
+		"hat",
+		"pair of pants",
+		"belt",
+		"necklace",
+		"purse",
+		"pair of shoes",
+		"blouse",
+		"skirt",
+		"watch",
+		"pair of socks",
+		"sweatshirt",
+		"sweater",
+		"tie",
+		"scarf",
+		"dress"
+	]);
+
 	var sides = KhanUtil.shuffle([
 		"left",
 		"right"
 	]);
+
+	var shirtStyles = KhanUtil.shuffle([
+		"long-sleeved",
+		"short-sleeved"
+	]);
+
+	var farmers = KhanUtil.shuffle([
+		{farmer:"farmer", crops:KhanUtil.shuffle(["tomato", "potato", "carrot", "bean", "corn stalk"]), field:"field"},
+		{farmer:"gardener", crops:KhanUtil.shuffle(["rose", "tulip", "daisy", "iris", "lily"]), field:"garden"}
+	]);
+
+	var distances = KhanUtil.shuffle([
+		"mile",
+		"kilometer"
+	]);
+
+	var distanceActivities = KhanUtil.shuffle([
+		{present:"ride", past:"rode", noun:"bike", done:"biked", continuous:"biking"},
+		{present:"row", past:"rowed", noun:"boat", done:"rowed", continuous:"rowing"},
+		{present:"drive", past:"drove", noun:"car", done:"driven", continuous:"driving"},
+		{present:"walk", past:"walked", noun:"dog", done:"walked", continuous:"walking"}
+	]);
+
+	var indefiniteArticle = function(word) {
+		var vowels = ['a', 'e', 'i', 'o', 'u'];
+		if ( _(vowels).indexOf( word[0].toLowerCase() ) > -1 ) {
+			return 'An ' + word;
+		}
+		return 'A ' + word;
+	};
 
 	jQuery.extend( KhanUtil, {
 		person: function( i ) {
@@ -287,23 +362,31 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 		},
 
 		he: function( i ) {
-			return people[i - 1][1] == "m" ? "he" : "she";
+			return people[i - 1][1] === "m" ? "he" : "she";
 		},
 
 		He: function( i ) {
-			return people[i - 1][1] == "m" ? "He" : "She";
+			return people[i - 1][1] === "m" ? "He" : "She";
 		},
 
 		him: function( i ) {
-			return people[i - 1][1] == "m" ? "him" : "her";
+			return people[i - 1][1] === "m" ? "him" : "her";
 		},
 
 		his: function( i ) {
-			return people[i - 1][1] == "m" ? "his" : "her";
+			return people[i - 1][1] === "m" ? "his" : "her";
 		},
 
 		His: function( i ) {
-			return people[i - 1][1] == "m" ? "His" : "Her";
+			return people[i - 1][1] === "m" ? "His" : "Her";
+		},
+
+		An: function(word) {
+			return indefiniteArticle(word);
+		},
+
+		an: function(word) {
+			return indefiniteArticle(word).toLowerCase();
 		},
 
 		vehicle: function( i ) {
@@ -362,6 +445,18 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 			return timesofday[i - 1];
 		},
 
+		school: function( i ) {
+			return schools[i - 1];
+		},
+
+		clothing: function( i ) {
+			return clothes[i - 1];
+		},
+
+		color: function( i ) {
+			return colors[i - 1];
+		},
+
 		fruit: function( i ) {
 			return fruits[i];
 		},
@@ -370,9 +465,48 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 			return deskItems[i];
 		},
 
+		distance: function( i ) {
+			return distances[i - 1];
+		},
+
+		rode: function( i ) {
+			return distanceActivities[i - 1].past;
+		},
+
+		ride: function( i ) {
+			return distanceActivities[i - 1].present;
+		},
+
+		bike: function( i ) {
+			return distanceActivities[i - 1].noun;
+		},
+
+		biked: function( i ) {
+			return distanceActivities[i - 1].done;
+		},
+
+		biking: function( i ) {
+			return distanceActivities[i - 1].continuous;
+		},
+
+		farmer: function( i ) {
+			return farmers[i - 1].farmer;
+		},
+
+		crop: function( i ) {
+			return farmers[i - 1].crops[0];
+		},
+
+		field: function( i ) {
+			return farmers[i - 1].field;
+		},
+
 		side: function( i ) {
 			return sides[i - 1];
-		}
+		},
 
+		shirtStyle: function( i ) {
+			return shirtStyles[i - 1];
+		},
 	});
 };

@@ -18,7 +18,7 @@ jQuery.extend(KhanUtil, {
 	/* Returns an array of the digits of a nonnegative integer in reverse
 	 * order: digits(376) = [6, 7, 3] */
 	digits: function( n ) {
-		if(n == 0) {
+		if (n === 0) {
 			return [0];
 		}
 
@@ -67,7 +67,7 @@ jQuery.extend(KhanUtil, {
 			return KhanUtil.placesLeftOfDecimal[ power ];
 		}
 	},
-	
+
 
 	//Adds 0.001 because of floating points uncertainty so it errs on the side of going further away from 0
 	roundTowardsZero: function( x ){
@@ -75,7 +75,7 @@ jQuery.extend(KhanUtil, {
 			return Math.ceil( x - 0.001 );
 		}
 		return Math.floor( x + 0.001 );
-		
+
 
 	},
 
@@ -199,7 +199,7 @@ jQuery.extend(KhanUtil, {
 
 		var maxf = Math.sqrt( number );
 		for (var f = 2; f <= maxf; f++) {
-			if ( number % f == 0 ) {
+			if ( number % f === 0 ) {
 				return jQuery.merge(KhanUtil.getPrimeFactorization( f ), KhanUtil.getPrimeFactorization( number / f ));
 			}
 		}
@@ -208,7 +208,9 @@ jQuery.extend(KhanUtil, {
 	getFactors: function( number ) {
 		var factors = [],
 			ins = function( n ) {
-				if ( factors.indexOf( n ) === -1 ) factors.push( n );
+				if ( _(factors).indexOf( n ) === -1 ) {
+					factors.push( n );
+				}
 			};
 
 		var maxf2 = number;
@@ -266,32 +268,70 @@ jQuery.extend(KhanUtil, {
 		}
 	},
 
-	//Get an array of unique random numbers between min and max
+	// Get an array of unique random numbers between min and max
 	randRangeUnique: function( min, max, count ) {
 		if ( count == null ) {
-			return Math.floor( KhanUtil.rand( max - min + 1 ) ) + min;
+			return KhanUtil.randRange( min, max );
 		} else {
 			var toReturn = [];
-			for ( i = min; i < max; i++ ){
+			for ( var i = min; i < max; i++ ){
 				toReturn.push( i );
 			}
-			
+
 			return KhanUtil.shuffle( toReturn, count );
 		}
 	},
+
+	// Get an array of unique random numbers between min and max,
+	// that ensures that none of the integers in the array are 0.
+	randRangeUniqueNonZero: function( min, max, count ) {
+		if ( count == null ) {
+			return KhanUtil.randRangeNonZero( min, max );
+		} else {
+			var toReturn = [];
+			for ( var i = min; i < max; i++ ){
+				if ( i === 0 ) {
+					continue;
+				}
+				toReturn.push( i );
+			}
+
+			return KhanUtil.shuffle( toReturn, count );
+		}
+	},
+
 	// Get a random integer between min and max with a perc chance of hitting
 	// target (which is assumed to be in the range, but it doesn't have to be).
 	randRangeWeighted: function( min, max, target, perc ) {
-		if ( KhanUtil.random() < perc ) return target;
-		else return KhanUtil.randRangeExclude( min, max, [target] );
+		if ( KhanUtil.random() < perc ) {
+			return target;
+		} else {
+			return KhanUtil.randRangeExclude( min, max, [target] );
+		}
 	},
 
 	// Get a random integer between min and max that is never any of the values
 	// in the excludes array.
 	randRangeExclude: function( min, max, excludes ) {
 		var result;
-		while ( result === undefined || excludes.indexOf(result) !== -1 )
+
+		do {
 			result = KhanUtil.randRange( min, max );
+		} while ( _(excludes).indexOf(result) !== -1 );
+
+		return result;
+	},
+
+	// Get a random integer between min and max with a perc chance of hitting
+	// target (which is assumed to be in the range, but it doesn't have to be).
+	// It never returns any of the values in the excludes array.
+	randRangeWeightedExclude: function( min, max, target, perc, excludes ) {
+		var result;
+
+		do {
+			result = KhanUtil.randRangeWeighted( min, max, target, perc );
+		} while ( _(excludes).indexOf(result) !== -1 );
+
 		return result;
 	},
 
@@ -301,8 +341,15 @@ jQuery.extend(KhanUtil, {
 	},
 
 	// Returns a random member of the given array
-	randFromArray: function( arr ) {
-		return arr[ KhanUtil.rand( arr.length ) ];
+	// If a count is passed, it gives an array of random members of the given array
+	randFromArray: function( arr, count ) {
+		if ( count == null ) {
+			return arr[ KhanUtil.rand( arr.length ) ];
+		} else {
+			return jQuery.map( new Array(count), function() {
+				return KhanUtil.randFromArray( arr );
+			});
+		}
 	},
 
 	// Returns a random member of the given array that is never any of the values
@@ -310,7 +357,7 @@ jQuery.extend(KhanUtil, {
 	randFromArrayExclude: function( arr, excludes ) {
 		var cleanArr = [];
 		for ( var i = 0; i < arr.length; i++ ) {
-			if ( excludes.indexOf( arr[i] ) === -1 ) {
+			if ( _(excludes).indexOf( arr[i] ) === -1 ) {
 				cleanArr.push( arr[i] );
 			}
 		}
@@ -350,13 +397,13 @@ jQuery.extend(KhanUtil, {
 			var nd = KhanUtil.toFraction( fract, tolerance );
 			nd[0] += Math.round( decimal - fract ) * nd[1];
 			return nd;
-		} else if ( Math.abs( Math.round( decimal ) - decimal ) <= tolerance ) {
+		} else if ( Math.abs( Math.round( Number( decimal ) ) - decimal ) <= tolerance ) {
 			return [ Math.round( decimal ), 1 ];
 		} else {
 			var loN = 0, loD = 1, hiN = 1, hiD = 1, midN = 1, midD = 2;
 
 			while ( 1 ) {
-				if ( Math.abs( midN / midD - decimal ) <= tolerance ) {
+				if ( Math.abs( Number(midN / midD) - decimal ) <= tolerance ) {
 					return [ midN, midD ];
 				} else if ( midN / midD < decimal) {
 					loN = midN;
@@ -401,11 +448,20 @@ jQuery.extend(KhanUtil, {
 	},
 
 	//Gives -1 or 1 so you can multiply to restore the sign of a number
-	restoreSign: function( num ){
+	restoreSign: function( num ) {
 		num = parseFloat( num );
 		if ( num < 0 ){
 			return -1;
 		}
 		return 1;
-	}
+	},
+
+	// Checks if a number or string representation thereof is an integer
+	isInt: function( num ) {
+		return parseFloat( num ) === parseInt( num, 10 ) && !isNaN( num );
+	},
+	BLUE: "#6495ED",
+	ORANGE: "#FFA500",
+	PINK: "#FF00AF",
+	GREEN: "#28AE7B"
 });
