@@ -178,6 +178,15 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 		"test",
 		"quiz"
 	]);
+	
+	var containers = KhanUtil.shuffle([
+		"bag",
+		"sack",
+		"flask",
+		"vial",
+		"cup",
+		"bottle"
+	]);
 
 	var binops = KhanUtil.shuffle([
 		"\\barwedge",
@@ -403,6 +412,10 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 
 		courseVar: function( i ) {
 			return courses[i - 1].charAt(0).toLowerCase();
+		},
+
+		container: function( i ) {
+			return containers[i - 1];
 		},
 
 		exam: function( i ) {

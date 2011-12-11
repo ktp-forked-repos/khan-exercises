@@ -11,7 +11,6 @@
 			<var id="ELEMENT">randElement()</var>
 			<var id="ISOTOPE">ELEMENT.protons + randFromArray( ELEMENT.neutrons )</var>
 			<var id="MOLES">roundTo( 1, randRange( 1, 10 ) * randFromArray( [ 0.1, 1, 10 ] ) )</var>
-			<var id="CONTAINER">randFromArray( [ "bag", "sack", "bottle", "flask", "vial" ] )</var>
 			
 			<var id="MASS">roundTo( 1, ISOTOPE * MOLES )</var>
 		</div>
@@ -19,10 +18,10 @@
 		<div class="problems">
 			<div class="calculate-mass">
 				<p class="problems spin">
-					<var>person(1)</var> {has|bought|found|owns} a <var>CONTAINER</var> containing <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
+					<var>person(1)</var> {has|bought|found|owns} a <var>container(1)</var> containing <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
 				</p>
 				
-				<p class="question">What is the mass of the <var>ELEMENT.fullname</var> in this <var>CONTAINER</var>?</p>
+				<p class="question">What is the mass of the <var>ELEMENT.fullname</var> in this <var>container(1)</var>?</p>
 				
 				<div class="solution" data-type="multiple">
 					<p><span class="sol" data-forms="decimal"><var>MASS</var></span> grams</p>
@@ -36,10 +35,10 @@
 			
 			<div class="calculate-moles">
 				<p class="problems spin">
-					<var>person(1)</var> {has|bought|found|owns} a <var>CONTAINER</var> containing <var>plural( MASS, "gram" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
+					<var>person(1)</var> {has|bought|found|owns} a  <var>container(1)</var> containing <var>plural( MASS, "gram" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
 				</p>
 				
-				<p class="question">How many moles of the <var>ELEMENT.fullname</var> are in this <var>CONTAINER</var>?</p>
+				<p class="question">How many moles of the <var>ELEMENT.fullname</var> are in this <var>container(1)</var>?</p>
 				
 				<p class="solution" data-type="decimal"><var>MOLES</var></p>
 				
