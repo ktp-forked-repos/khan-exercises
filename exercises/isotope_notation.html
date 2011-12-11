@@ -19,7 +19,7 @@
 				<div class="question">
 					<div class="graphie">
 						init({
-							range: [ [0, 8], [-1, 1] ]
+							range: [ [0, 12], [-1, 1] ]
 						});
 
 						label( [2, 0.3],
@@ -37,8 +37,8 @@
 				
 				<div class="hints">
 					<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
-					<p>The number of neutron is equal to the atomic mass minus the number of atomic number</p>
-					<p>Thus, the mass of this isotope of <var>ELEMENT.fullname</var> is <code><var>MASS</var></code>.</p>
+					<p>The number of neutrons is equal to the atomic mass minus the atomic number</p>
+					<p>Thus, the number of neutron in this isotope of <var>ELEMENT.fullname</var> is <code><var>MASS</var> - <var>ELEMENT.protons</var> = <var>NEUTRONS</var></code>.</p>
 				</div>
 				
 			</div>
@@ -48,7 +48,7 @@
 				<div class="question">
 					<div class="graphie">
 						init({
-							range: [ [0, 8], [-1, 1] ]
+							range: [ [0, 12], [-1, 1] ]
 						});
 
 						label( [2, 0.3],
@@ -63,13 +63,12 @@
 					</div>
 				</div>
 				<p class="solution" data-forms="integer"><var>ELEMENT.protons</var></p>
-			</div>
 			
-			<div class="hints">
-				<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
-				<p>The number of protons is equal to the atomic number, thus the number of protons in this isotope of <var>ELEMENT.fullname</var> is <code><var>ELEMENT.protons</var></code>.</p>
+				<div class="hints">
+					<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
+					<p>The number of protons is equal to the atomic number, thus the number of protons in this isotope of <var>ELEMENT.fullname</var> is <code><var>ELEMENT.protons</var></code>.</p>
+				</div>
 			</div>
-			
 		</div>
 	</div>
 </body>
