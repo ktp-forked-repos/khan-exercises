@@ -64,6 +64,13 @@ jQuery.extend(KhanUtil, {
 		return KhanUtil.randFromArray( all_elements );
 	},
 	
+	// Get a random isotope of an element, i.e. it has a specific number of neutrons
+	randIsotope: function( ) {
+		selected_element = KhanUtil.randFromArray( all_elements );
+		selected_element.neutrons = KhanUtil.randFromArray( selected_element.neutrons );
+		return selected_element;
+	},
+	
 	// Get a random element from a specific group in periodic table
 	randElementFromGroup: function( n ) {
 		return KhanUtil.randFromArray(  periodic_groups[ n - 1 ] );

@@ -8,43 +8,44 @@
 <body>
 	<div class="exercise">
 		<div class="vars" >
-			<var id="ELEMENT">randElement()</var>
-			<var id="ISOTOPE">ELEMENT.protons + randFromArray( ELEMENT.neutrons )</var>
+			<var id="ELEMENT">randIsotope()</var>
+			<var id="ATOMIC_MASS">ELEMENT.protons + ELEMENT.neutrons</var>
+			<var id="ISOTOPE">ELEMENT.fullname + "-" + ATOMIC_MASS</var>
 			<var id="MOLES">roundTo( 1, randRange( 1, 10 ) * randFromArray( [ 0.1, 1, 10 ] ) )</var>
 			
-			<var id="MASS">roundTo( 1, ISOTOPE * MOLES )</var>
+			<var id="MASS">roundTo( 1, ATOMIC_MASS * MOLES )</var>
 		</div>
 
 		<div class="problems">
 			<div class="calculate-mass">
-				<p class="problems spin">
-					<var>person(1)</var> {has|bought|found|owns} a <var>chemistryContainer(1)</var> containing <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
+				<p class="problem spin">
+					<var>person(1)</var> {has|owns|bought|found|discovered} a <var>chemistryContainer(1)</var> containing <var>plural( MOLES, "mole" )</var> of <var>ISOTOPE</var>.
 				</p>
 				
-				<p class="question">What is the mass of the <var>ELEMENT.fullname</var> in this <var>chemistryContainer(1)</var>?</p>
+				<p class="question">What is the mass of <code>^{<var>ATOMIC_MASS</var>}<var>ELEMENT.symbol</var></code> in this <var>chemistryContainer(1)</var>?</p>
 				
 				<div class="solution" data-type="multiple">
 					<p><span class="sol" data-forms="decimal"><var>MASS</var></span> grams</p>
 				</div>
 				
 				<div class="hints">
-					<p>The mass of one mole of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var> is <var>ISOTOPE</var> grams.</p>
-					<p>Thus, the mass of <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var> is <code><var>MOLES</var> * <var>ISOTOPE</var> = <var>MASS</var></code> grams.</p>
+					<p>The mass of one mole of <code>^{<var>ATOMIC_MASS</var>}<var>ELEMENT.symbol</var></code> is <var>ATOMIC_MASS</var> grams.</p>
+					<p>Thus, the mass of <var>plural( MOLES, "mole" )</var> of <code>^{<var>ATOMIC_MASS</var>}<var>ELEMENT.symbol</var></code> is <code><var>MOLES</var> * <var>ATOMIC_MASS</var> = <var>MASS</var></code> grams.</p>
 				</div>
 			</div>
 			
 			<div class="calculate-moles">
-				<p class="problems spin">
-					<var>person(1)</var> {has|owns|bought|found|discovered} a  <var>chemistryContainer(1)</var> containing <var>plural( MASS, "gram" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
+				<p class="problem spin">
+					<var>person(1)</var> {has|owns|bought|found|discovered} a <var>chemistryContainer(1)</var> containing <var>plural( MASS, "gram" )</var> of <var>ISOTOPE</var>.
 				</p>
 				
-				<p class="question">How many moles of the <var>ELEMENT.fullname</var> are in this <var>chemistryContainer(1)</var>?</p>
+				<p class="question">How many moles of <code>^{<var>ATOMIC_MASS</var>}<var>ELEMENT.symbol</var></code> are in this <var>chemistryContainer(1)</var>?</p>
 				
 				<p class="solution" data-type="decimal"><var>MOLES</var></p>
 				
 				<div class="hints">
-					<p>One mole of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var> has a mass of <var>ISOTOPE</var> grams.</p>
-					<p>Thus, <code><var>MASS</var> / <var>ISOTOPE</var></code>, or <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var> has a mass of <var>plural( MASS, "gram" )</var>.</p>
+					<p>One mole of <code>^{<var>ATOMIC_MASS</var>}<var>ELEMENT.symbol</var></code> has a mass of <var>ATOMIC_MASS</var> grams.</p>
+					<p>Thus, <code><var>MASS</var> / <var>ATOMIC_MASS</var></code>, or <var>plural( MOLES, "mole" )</var> of <code>^{<var>ATOMIC_MASS</var>}<var>ELEMENT.symbol</var></code> has a mass of <var>plural( MASS, "gram" )</var>.</p>
 				</div>
 			</div>
 		</div>
