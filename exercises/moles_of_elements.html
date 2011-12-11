@@ -2,7 +2,7 @@
 <html data-require="math chemistry word-problems spin">
 <head>
 	<meta charset="UTF-8" />
-	<title>Mole of elements</title>
+	<title>Moles of elements</title>
 	<script src="../khan-exercise.js"></script>
 </head>
 <body>
@@ -18,10 +18,10 @@
 		<div class="problems">
 			<div class="calculate-mass">
 				<p class="problems spin">
-					<var>person(1)</var> {has|bought|found|owns} a <var>container(1)</var> containing <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
+					<var>person(1)</var> {has|bought|found|owns} a <var>chemistryContainer(1)</var> containing <var>plural( MOLES, "mole" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
 				</p>
 				
-				<p class="question">What is the mass of the <var>ELEMENT.fullname</var> in this <var>container(1)</var>?</p>
+				<p class="question">What is the mass of the <var>ELEMENT.fullname</var> in this <var>chemistryContainer(1)</var>?</p>
 				
 				<div class="solution" data-type="multiple">
 					<p><span class="sol" data-forms="decimal"><var>MASS</var></span> grams</p>
@@ -35,10 +35,10 @@
 			
 			<div class="calculate-moles">
 				<p class="problems spin">
-					<var>person(1)</var> {has|bought|found|owns} a  <var>container(1)</var> containing <var>plural( MASS, "gram" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
+					<var>person(1)</var> {has|owns|bought|found|discovered} a  <var>chemistryContainer(1)</var> containing <var>plural( MASS, "gram" )</var> of <var>ELEMENT.fullname</var>-<var>ISOTOPE</var>.
 				</p>
 				
-				<p class="question">How many moles of the <var>ELEMENT.fullname</var> are in this <var>container(1)</var>?</p>
+				<p class="question">How many moles of the <var>ELEMENT.fullname</var> are in this <var>chemistryContainer(1)</var>?</p>
 				
 				<p class="solution" data-type="decimal"><var>MOLES</var></p>
 				
@@ -48,6 +48,7 @@
 				</div>
 			</div>
 		</div>
+		<a class="related-video" href="/video/the-mole-and-avogadro-s-number" data-youtube-id="AsqEkF7hcII">The mole and Avogadro's number</a>
 	</div>
 </body>
 </html>
