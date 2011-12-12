@@ -10,7 +10,16 @@
 		<div class="vars" >
 			<var id="GROUP">rand(8)+1</var>
 			<var id="ELEMENTS">shuffle( getElementsFromGroup( GROUP ) )</var>
+			
+			<var id="ELEMENT_SORT">jQuery.extend( true, [], ELEMENTS ).sort( function(a, b) {
+				return a.protons - b.protons;
+			} )</var>
+			<var id="ELEMENT_SORT_TEX">jQuery.map( ELEMENT_SORT, function( el ) {
+				return el.symbol;
+			} ).join( "," )</var>
+		
 			<var id="SORTER">createSorter()</var>
+			
 		</div>
 
 		<div class="problems">
@@ -39,7 +48,7 @@
 					</div>
 					<div class="guess">SORTER.getContent()</div>
 					<div class="validator-function">
-						return guess.join( "," ) === 1;
+						return guess.join( "," ).replace( /_{[0-9]+}/g, "" ) === ELEMENT_SORT_TEX;
 					</div>
 					<div class="show-guess">
 						SORTER.setContent( guess );
