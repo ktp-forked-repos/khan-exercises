@@ -1,32 +1,55 @@
 <!DOCTYPE html>
-<html data-require="math chemistry">
+<html data-require="math chemistry interactive">
 <head>
 	<meta charset="UTF-8" />
-	<title>Ionization energies within a group</title>
+	<title>Comparing ionization energies</title>
 	<script src="../khan-exercise.js"></script>
 </head>
 <body>
 	<div class="exercise">
 		<div class="vars" >
 			<var id="GROUP">rand(8)+1</var>
-			<var id="ELEMENT1">randElementFromGroup( GROUP )</var>
-			<div data-ensure="ELEMENT1 != ELEMENT2">
-				<var id="ELEMENT2">randElementFromGroup( GROUP )</var>
-			</div>
+			<var id="ELEMENTS">shuffle( getElementsFromGroup( GROUP ) )</var>
+			<var id="SORTER">createSorter()</var>
 		</div>
 
 		<div class="problems">
 			<div>
-				<p class="problems">Both <var>ELEMENT1.fullname</var> (atomic number <var>ELEMENT1.protons</var>) and <var>ELEMENT2.fullname</var> (atomic number <var>ELEMENT2.protons</var>) are in group <var>GROUP</var>.</p>
-				<p class="question">Which has the greater ionization energy?</p>
-				<p class="solution" data-forms="integer"><var>MASS</var></p>
+			
+				<div class="question">
+					<p>The following elements are all in group <var>GROUP</var>. Put them in order of increasing ionization energy.</p>
+					<p>
+						<ul id="sortable">
+							<li data-each="ELEMENTS as ELEMENT">
+								<div style="position:relative;top:-5px">
+									<code><var>ELEMENT.symbol</var></code>
+								</div>
+								<div style="position:relative;top:-52px">
+									<code>_{<var>ELEMENT.protons</var>}</code>
+								</div>
+							</li>
+						</ul>
+						<var>SORTER.init( "sortable" )</var>
+					</p>
+				</div>
+				
+				<div class="solution" data-type="custom">
+					<div class="instruction">
+						Drag the element left and right so they are in order from least to greatest ionization energy
+					</div>
+					<div class="guess">SORTER.getContent()</div>
+					<div class="validator-function">
+						return guess.join( "," ) === 1;
+					</div>
+					<div class="show-guess">
+						SORTER.setContent( guess );
+					</div>
+				</div>
+				
 			</div>
 		</div>
 
-		<div class="hints">
-			<p>The mass of a neutron is <code>1</code>, the mass of a proton is <code>1</code> and the mass of an electron is so small it can be ignored.</p>
-			<p>Thus, the total mass of this atom of <var>ELEMENT.fullname</var> is <code><var>NEUTRONS</var> + <var>PROTONS</var> = <var>MASS</var></code>.</p>
-		</div>
+		<a class="related-video" href="/video/periodic-table-trends--ionization-energy" data-youtube-id="ywqg9PorTAw">Periodic table trends: ionization energy</a>
 	</div>
 </body>
 </html>
