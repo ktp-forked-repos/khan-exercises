@@ -1,7 +1,7 @@
 (function() {
 
 // Elements
-// There's probably a more efficient way to do this, perhaps index by proton number.
+// There must be a more efficient way to do this, to avoid having to generate all the chemicals upfront.
 // The attribute 'neutrons' gives the number of nuetrons in stable isotopes, in order of abundance.
 
 function element( protons, symbol, fullname, neutrons) {
@@ -50,13 +50,32 @@ var all_elements = [ H ].concat( group1, group2, group3, group4, group5, group6,
 // Molecules
 // Molecules are defined by their molecular formula which is a passed as an array of alternating and numbers
 // e.g. Water is  molecule( [ H, 2, O, 1 ] )
+// Atomic mass units assume that molecules consist of the most abundant isotopes
 
-function molecule( components, commonName, molecularFormula) {
+function molecule( components, commonName) {
 	this.commonName = commonName;
-	this.molecularFormula = molecularFormula;
+	this.molecularFormula = "";
+	this.amu = 0;
+	
+	for(var i = 0; i < components.length; i += 2) {
+		this.amu += ( components[i].protons +  components[i].neutrons[0] ) * components[ i + 1 ];
+		this.molecularFormula += components[i].symbol;
+		if ( components[ i + 1 ] > 1 ) {
+			this.molecularFormula += "_{" + components[ i + 1 ] + "}";
+		}
+	}
 }
 
-// H2O = molecule( [ H, 2, O, 1 ] )
+H2O = new molecule( [ H, 2, O, 1 ], "water" );
+CO2 = new molecule( [ C, 1, O, 2 ], "carbon dioxide" );
+CH4 = new molecule( [ C, 1, H, 1 ], "methane" );
+H2SO4 = new molecule( [ H, 2, S, 1, O, 4 ], "sulfuric acid" );
+HCl = new molecule( [ H, 1, Cl, 1 ], "hydrochloric acid" );
+NaOH = new molecule( [ Na, 1, O, 1, H, 1 ], "hydrochloric acid" );
+MgCl2 = new molecule( [ Mg, 1, Cl, 2 ], "magnesium chloride" );
+NaCl = new molecule( [ Na, 1, Cl, 1 ], "sodium chloride" );
+
+all_compounds = [ H2O, H2SO4, NaCl ];
 
 jQuery.extend(KhanUtil, {
 	// Get a random element
@@ -74,6 +93,11 @@ jQuery.extend(KhanUtil, {
 	// Get a random element from a specific group in periodic table
 	randElementFromGroup: function( n ) {
 		return KhanUtil.randFromArray(  periodic_groups[ n - 1 ] );
+	},
+	
+	// Test molecule properties
+	randCompound: function( ) {
+		return KhanUtil.randFromArray( all_compounds );
 	}
 } );
 
