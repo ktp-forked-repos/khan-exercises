@@ -31,16 +31,20 @@ var Cl = new element( 17, "Cl", "chlorine", [ 18, 20 ] );
 var Ar = new element( 18, "Ar", "argon", [ 22, 18, 20 ] );
 var K  = new element( 19, "K", "potassium", [ 20, 22 ] );
 var Ca = new element( 20, "Ca", "calcium", [ 20, 24, 22, 23, 26 ] );
+var Ga = new element( 31, "Ga", "gallium", [ 38, 40 ] );
+var Ge = new element( 32, "Ga", "germanium", [ 42, 40, 38, 44, 41 ] );
+var As = new element( 33, "As", "arsnic", [ 42 ] );
+var Se = new element( 34, "Se", "selenium", [ 46, 44, 42, 48, 43, 40 ] );
 var Br = new element( 35, "Br", "bromine", [ 44, 46 ] );
 var Kr = new element( 36, "Kr", "krypton", [ 48, 50, 46, 47, 44, 42 ] );
 
 // Groups in the periodic table
 var group1 = [ Li, Na, K ];
 var group2 = [ Be, Mg, Ca ];
-var group3 = [ B, Al ];
-var group4 = [ C, Si ];
-var group5 = [ N, P ];
-var group6 = [ O, S ];
+var group3 = [ B, Al, Ga ];
+var group4 = [ C, Si, Ge ];
+var group5 = [ N, P, As ];
+var group6 = [ O, S, Se ];
 var group7 = [ F, Cl, Br ];
 var group8 = [ He, Ne, Ar, Kr ];
 
@@ -90,7 +94,12 @@ jQuery.extend(KhanUtil, {
 		return selected_element;
 	},
 	
-	// Get a random element from a specific group in periodic table
+	// Get all elements from a given group
+	getElementsFromGroup: function( n ) {
+		return periodic_groups[ n - 1 ];
+	},
+	
+	// Get a random element from a given group in periodic table
 	randElementFromGroup: function( n ) {
 		return KhanUtil.randFromArray(  periodic_groups[ n - 1 ] );
 	},
