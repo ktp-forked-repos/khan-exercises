@@ -179,13 +179,22 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 		"quiz"
 	]);
 	
-	var containers = KhanUtil.shuffle([
-		"bag",
-		"sack",
+	var chemistryContainers = KhanUtil.shuffle([
 		"flask",
 		"vial",
-		"cup",
+		"beaker",
+		"bucket",
+		"test tube",
 		"bottle"
+	]);
+	
+	var possessionVerbs = KhanUtil.shuffle([
+		"has",
+		"owns",
+		"bought",
+		"found",
+		"is holding",
+		"discovered"
 	]);
 
 	var binops = KhanUtil.shuffle([
@@ -414,8 +423,12 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 			return courses[i - 1].charAt(0).toLowerCase();
 		},
 
-		container: function( i ) {
-			return containers[i - 1];
+		chemistryContainer: function( i ) {
+			return chemistryContainers[i - 1];
+		},
+		
+		possessionVerb: function( i ) {
+			return possessionVerbs[i - 1];
 		},
 
 		exam: function( i ) {
