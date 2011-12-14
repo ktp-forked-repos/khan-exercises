@@ -188,12 +188,20 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 		"bottle"
 	]);
 	
+	var metalShapes = KhanUtil.shuffle([
+		"ring",
+		"bar",
+		"lump",
+		"coin"
+	]);
+	
 	var possessionVerbs = KhanUtil.shuffle([
 		"has",
 		"owns",
 		"bought",
 		"found",
 		"is holding",
+		"has borrowed",
 		"discovered"
 	]);
 
@@ -425,6 +433,10 @@ jQuery.fn[ "word-problemsLoad" ] = function() {
 
 		chemistryContainer: function( i ) {
 			return chemistryContainers[i - 1];
+		},
+		
+		metalShape: function( i ) {
+			return metalShapes[i - 1];
 		},
 		
 		possessionVerb: function( i ) {

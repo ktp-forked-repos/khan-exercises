@@ -31,12 +31,17 @@ var Cl = new element( 17, "Cl", "chlorine", [ 18, 20 ] );
 var Ar = new element( 18, "Ar", "argon", [ 22, 18, 20 ] );
 var K  = new element( 19, "K", "potassium", [ 20, 22 ] );
 var Ca = new element( 20, "Ca", "calcium", [ 20, 24, 22, 23, 26 ] );
+var Cu = new element( 29, "Cu", "copper", [ 34, 36 ] );
 var Ga = new element( 31, "Ga", "gallium", [ 38, 40 ] );
 var Ge = new element( 32, "Ga", "germanium", [ 42, 40, 38, 44, 41 ] );
 var As = new element( 33, "As", "arsenic", [ 42 ] );
 var Se = new element( 34, "Se", "selenium", [ 46, 44, 42, 48, 43, 40 ] );
 var Br = new element( 35, "Br", "bromine", [ 44, 46 ] );
 var Kr = new element( 36, "Kr", "krypton", [ 48, 50, 46, 47, 44, 42 ] );
+var Ag = new element( 47, "Ag", "silver", [ 60, 62 ] );
+var Pt = new element( 78, "Pt", "platinum", [ 117, 116, 118, 120, 114 ] );
+var Au = new element( 79, "Au", "gold", [ 118 ] );
+
 
 // Groups in the periodic table
 var group1 = [ Li, Na, K ];
@@ -47,9 +52,10 @@ var group5 = [ N, P, As ];
 var group6 = [ O, S, Se ];
 var group7 = [ F, Cl, Br ];
 var group8 = [ He, Ne, Ar, Kr ];
+var metals = [ Cu, Ag, Pt, Au ];
 
 var periodic_groups = [ group1, group2, group3, group4, group5, group6, group7, group8 ];
-var all_elements = [ H ].concat( group1, group2, group3, group4, group5, group6, group7, group8 );
+var all_elements = [ H ].concat( group1, group2, group3, group4, group5, group6, group7, group8, metals );
 
 // Molecules
 // Molecules are defined by their molecular formula which is a passed as an array of alternating and numbers
@@ -101,6 +107,15 @@ jQuery.extend(KhanUtil, {
 	// Get all elements from a given group
 	getElementsFromGroup: function( n ) {
 		return periodic_groups[ n - 1 ];
+	},
+	
+	getRandElementOfType: function( type ) {
+		if( type == "metal" ){
+			return KhanUtil.randFromArray( metals );
+		}
+		else {
+			return KhanUtil.randFromArray( all_elements );
+		}
 	},
 	
 	// Get a random element from a given group in periodic table
