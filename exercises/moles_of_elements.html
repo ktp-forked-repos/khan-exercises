@@ -19,7 +19,7 @@
 		<div class="problems">
 			<div class="calculate-mass">
 				<p class="problem">
-					<var>person(1)</var> <var>possessionVerb(1)</var> a <var>chemistryContainer(1)</var> containing <var>plural( MOLES, "mole" )</var> of <code><var>ISOTOPE</var></code>.
+					<var>person(1)</var> <var>possessionVerb(1)</var> a <var>chemistryContainer(1)</var> that contains <var>plural( MOLES, "mole" )</var> of <code><var>ISOTOPE</var></code>.
 				</p>
 				
 				<p class="question">What is the mass of <code><var>ISOTOPE</var></code> in this <var>chemistryContainer(1)</var>?</p>
@@ -29,14 +29,15 @@
 				</div>
 				
 				<div class="hints">
-					<p>The mass of one mole of <code><var>ISOTOPE</var></code> is <var>ATOMIC_MASS</var> grams.</p>
-					<p>Thus, the mass of <var>plural( MOLES, "mole" )</var> of <code><var>ISOTOPE</var></code> is <code><var>MOLES</var> * <var>ATOMIC_MASS</var> = <var>MASS</var></code> grams.</p>
+					<p>The atomic mass of <code><var>ISOTOPE</var></code> is <code><var>ATOMIC_MASS</var></code>.</p>
+					<p>Therefore, one mole of <code><var>ISOTOPE</var></code> has mass of <code><var>ATOMIC_MASS</var></code> grams.</p>
+					<p>Thus, the mass of <code><var>MOLES</var></code> mole<var>plural( MOLES )</var> of <code><var>ISOTOPE</var></code> is <code><var>MOLES</var> * <var>ATOMIC_MASS</var> = <var>MASS</var></code> grams.</p>
 				</div>
 			</div>
 			
 			<div class="calculate-moles">
 				<p class="problem">
-					<var>person(1)</var> <var>possessionVerb(1)</var> a <var>chemistryContainer(1)</var> containing <var>plural( MASS, "gram" )</var> of <code><var>ISOTOPE</var></code>.
+					<var>person(1)</var> <var>possessionVerb(1)</var> a <var>chemistryContainer(1)</var> that contains <var>plural( MASS, "gram" )</var> of <code><var>ISOTOPE</var></code>.
 				</p>
 				
 				<p class="question">How many moles of <code><var>ISOTOPE</var></code> are in this <var>chemistryContainer(1)</var>?</p>
@@ -44,10 +45,32 @@
 				<p class="solution" data-type="decimal"><var>MOLES</var></p>
 				
 				<div class="hints">
-					<p>One mole of <code><var>ISOTOPE</var></code> has a mass of <var>ATOMIC_MASS</var> grams.</p>
-					<p>Thus, <code><var>MASS</var> / <var>ATOMIC_MASS</var></code>, or <var>plural( MOLES, "mole" )</var> of <code><var>ISOTOPE</var></code> has a mass of <var>plural( MASS, "gram" )</var>.</p>
+					<p>The atomic mass of <code><var>ISOTOPE</var></code> is <code><var>ATOMIC_MASS</var></code>.</p>
+					<p>Therefore, <code>1</code> mole of <code><var>ISOTOPE</var></code> has a mass of <code><var>ATOMIC_MASS</var></code> grams.</p>
+					<p>If <code>1</code> mole = <code><var>ATOMIC_MASS</var></code> grams then <code>1 / <var>ATOMIC_MASS</var></code> moles <code>= 1</code> gram.</p>
+					<p>Therefore, <code><var>MASS</var> /  <var>ATOMIC_MASS</var></code> moles <code>= <var>MASS</var></code> gram<var>plural( MASS )</var>.</p>
+					<p>Thus, <code><var>MOLES</var></code> mole<var>plural( MOLES )</var> of <code><var>ISOTOPE</var></code> has a mass of <code><var>ATOMIC_MASS</var></code> gram<var>plural( ATOMIC_MASS )</var>.</p>
 				</div>
 			</div>
+			
+			<div class="avogadro-number">
+				<p class="problem">
+					<var>person(1)</var> <var>possessionVerb(1)</var> a <var>chemistryContainer(1)</var> that contains <code>6.022 * 10^{23}</code> atoms of <code><var>ISOTOPE</var></code>.
+				</p>
+				
+				<p class="question">What is the mass of <code><var>ISOTOPE</var></code> in this <var>chemistryContainer(1)</var>?</p>
+				
+				<div class="solution" data-type="multiple">
+					<p><span class="sol" data-forms="integer"><var>ATOMIC_MASS</var></span> grams</p>
+				</div>
+				
+				<div class="hints">
+					<p><code>6.022 * 10^{23}</code> atoms is one mole of atoms.</p>
+					<p>The atomic mass of <code><var>ISOTOPE</var></code> is <code><var>ATOMIC_MASS</var></code>.</p>
+					<p>Thus, the mass of <code>6.022 * 10^{23}</code> atoms of <code><var>ISOTOPE</var></code> is <code><var>ATOMIC_MASS</var></code> grams.</p>
+				</div>
+			</div>
+			
 		</div>
 		<a class="related-video" href="/video/the-mole-and-avogadro-s-number" data-youtube-id="AsqEkF7hcII">The mole and Avogadro's number</a>
 	</div>
