@@ -1,12 +1,5 @@
 (function() {
 
-function element( protons, symbol, fullname, neutrons) {
-	this.symbol = symbol;
-	this.fullname = fullname;
-	this.protons = protons;
-	this.neutrons = neutrons;
-}
-
 var element_objects = {
 	H:  { protons: 1, symbol: "H", name: "hydrogen", mass: 1.008, neutrons: [ 0, 1 ], oxidationStates: [ 1, 0, -1 ] },
 	He: { protons: 2, symbol: "He", name: "helium", mass: 4.003, neutrons: [ 2, 1 ], oxidationStates: [ 0 ] },
@@ -18,10 +11,33 @@ var element_objects = {
 	O:  { protons: 8, symbol: "O", name: "oxygen", mass: 15.999, neutrons: [ 8, 10, 9 ], oxidationStates: [ -2, 0 ] },
 	F:  { protons: 9, symbol: "F", name: "fluorine", mass: 18.998, neutrons: [ 10 ], oxidationStates: [ -1, 0 ] },
 	Ne: { protons: 10, symbol: "Ne", name: "neon", mass: 20.180, neutrons: [ 10, 12, 11 ], oxidationStates: [ 0 ] },
-	Na: { protons: 11, symbol: "Na", name: "sodium", mass: 22.990, neutrons: [ 12 ], oxidationStates: [ 0, 1 ] }
+	Na: { protons: 11, symbol: "Na", name: "sodium", mass: 22.990, neutrons: [ 12 ], oxidationStates: [ 0, 1 ] },
+	Mg: { protons: 12, symbol: "Mg", name: "magnesium", mass: 24.305, neutrons: [ 12, 14, 13 ], oxidationStates: [ 0, 2 ] },
+	Au: { protons: 79, symbol: "Au", name: "gold", mass: 196.967, neutrons: [ 118 ], oxidationStates: [ 0, 1, 3 ] }
 }
 
 var elements = [ "H", "He", "Li", "Be", "B", "C", "N", "O", "F" ];
+
+/*
+var Al = new element( 13, "Al", "aluminium", [ 14 ] );
+var Si = new element( 14, "Si", "silicon", [ 14, 15, 16 ] );
+var P  = new element( 15, "P", "phosphorus", [ 16 ] );
+var S  = new element( 16, "S", "sulfur", [ 16, 18, 17, 20 ] );
+var Cl = new element( 17, "Cl", "chlorine", [ 18, 20 ] );
+var Ar = new element( 18, "Ar", "argon", [ 22, 18, 20 ] );
+var K  = new element( 19, "K", "potassium", [ 20, 22 ] );
+var Ca = new element( 20, "Ca", "calcium", [ 20, 24, 22, 23, 26 ] );
+var Cu = new element( 29, "Cu", "copper", [ 34, 36 ] );
+var Ga = new element( 31, "Ga", "gallium", [ 38, 40 ] );
+var Ge = new element( 32, "Ga", "germanium", [ 42, 40, 38, 44, 41 ] );
+var As = new element( 33, "As", "arsenic", [ 42 ] );
+var Se = new element( 34, "Se", "selenium", [ 46, 44, 42, 48, 43, 40 ] );
+var Br = new element( 35, "Br", "bromine", [ 44, 46 ] );
+var Kr = new element( 36, "Kr", "krypton", [ 48, 50, 46, 47, 44, 42 ] );
+var Ag = new element( 47, "Ag", "silver", [ 60, 62 ] );
+var Pt = new element( 78, "Pt", "platinum", [ 117, 116, 118, 120, 
+*/
+
 
 // --- Compounds ---
 // Compounds are defined by their molecular formula which is a passed as an array of alternating and numbers
@@ -48,28 +64,9 @@ var compounds = [
 	new Compound( [ "C", 1, "O", 2 ], "carbon dioxide" ),
 	new Compound( [ "N", 1, "H", 3 ], "ammonia" ),
 	new Compound( [ "C", 1, "H", 4 ], "methane" ),
-	new Compound( [ "Na", 1, "O", 1, "H", 1 ], "sodium hydroxide" )
+	new Compound( [ "Na", 1, "O", 1, "H", 1 ], "sodium hydroxide" ),
+	new Compound( [ "Mg", 1, "O", 1 ], "magnesium oxide" ),
 ];
-
-var Mg = new element( 12, "Mg", "magnesium", [ 12, 14, 13 ] );
-var Al = new element( 13, "Al", "aluminium", [ 14 ] );
-var Si = new element( 14, "Si", "silicon", [ 14, 15, 16 ] );
-var P  = new element( 15, "P", "phosphorus", [ 16 ] );
-var S  = new element( 16, "S", "sulfur", [ 16, 18, 17, 20 ] );
-var Cl = new element( 17, "Cl", "chlorine", [ 18, 20 ] );
-var Ar = new element( 18, "Ar", "argon", [ 22, 18, 20 ] );
-var K  = new element( 19, "K", "potassium", [ 20, 22 ] );
-var Ca = new element( 20, "Ca", "calcium", [ 20, 24, 22, 23, 26 ] );
-var Cu = new element( 29, "Cu", "copper", [ 34, 36 ] );
-var Ga = new element( 31, "Ga", "gallium", [ 38, 40 ] );
-var Ge = new element( 32, "Ga", "germanium", [ 42, 40, 38, 44, 41 ] );
-var As = new element( 33, "As", "arsenic", [ 42 ] );
-var Se = new element( 34, "Se", "selenium", [ 46, 44, 42, 48, 43, 40 ] );
-var Br = new element( 35, "Br", "bromine", [ 44, 46 ] );
-var Kr = new element( 36, "Kr", "krypton", [ 48, 50, 46, 47, 44, 42 ] );
-var Ag = new element( 47, "Ag", "silver", [ 60, 62 ] );
-var Pt = new element( 78, "Pt", "platinum", [ 117, 116, 118, 120, 114 ] );
-var Au = new element( 79, "Au", "gold", [ 118 ] );
 
 
 /*
