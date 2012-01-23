@@ -11,9 +11,7 @@
 			<var id="ELEMENT">randElement()</var>
 			<var id="PROTONS">ELEMENT.protons</var>
 			<var id="NEUTRONS">randFromArray(ELEMENT.neutrons)</var>
-			<div data-ensure="ELECTRONS > 0">
-				<var id="ELECTRONS">PROTONS + randRange( -4, 4 )</var>
-			</div>
+			<var id="ELECTRONS">PROTONS + randFromArray( ELEMENT.oxidationStates )</var>
 			<var id="PARTICLES">shuffle( [ plural( PROTONS, "proton" ), plural( NEUTRONS, "neutron" ), plural( ELECTRONS, "electron" ) ] )</var>
 			
 			<var id="CHARGE">PROTONS - ELECTRONS</var>

@@ -2,7 +2,7 @@
 <html data-require="math chemistry word-problems spin">
 <head>
 	<meta charset="UTF-8" />
-	<title>Moles of elements</title>
+	<title>Moles of compounds</title>
 	<script src="../khan-exercise.js"></script>
 </head>
 <body>
@@ -10,17 +10,16 @@
 		<div class="vars" >
 			<var id="COMPOUND">randCompound()</var>
 			<var id="COMPOUND_NAME">COMPOUND.commonName</var>
-			<var id="ATOMIC_MASS">COMPOUND.amu</var>
+			<var id="ATOMIC_MASS">COMPOUND.mass</var>
 			<var id="FORMULA">COMPOUND.molecularFormula</var>
 			<var id="MOLES">roundTo( 1, randRange( 1, 10 ) * randFromArray( [ 0.1, 1, 10 ] ) )</var>
-			
 			<var id="MASS">roundTo( 1, ATOMIC_MASS * MOLES )</var>
 		</div>
 
 		<div class="problems">
 			<div class="calculate-mass">
 				<p class="problem">
-					<var>person(1)</var> has a <var>chemistryContainer(1)</var> containing <var>plural( MOLES, "mole" )</var> of <code><var>FORMULA</var></code>.
+					<var>person(1)</var> <var>possessionVerb(1)</var> a <var>chemistryContainer(1)</var> containing <var>plural( MOLES, "mole" )</var> of <code><var>FORMULA</var></code>.
 				</p>
 				
 				<p class="question">What is the mass of <var>COMPOUND_NAME</var> in this <var>chemistryContainer(1)</var>?</p>
@@ -30,7 +29,7 @@
 				</div>
 				
 				<div class="hints">
-					<p>The mass of one mole of  is <var>ATOMIC_MASS</var> grams.</p>
+					<p>The mass of one mole of <var>COMPOUND_NAME</var> is <var>ATOMIC_MASS</var> grams.</p>
 					<p>Thus, the mass of <var>plural( MOLES, "mole" )</var> of </code> is <code><var>MOLES</var> * <var>ATOMIC_MASS</var> = <var>MASS</var></code> grams.</p>
 				</div>
 			</div>

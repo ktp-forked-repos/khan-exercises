@@ -9,13 +9,13 @@
 	<div class="exercise">
 		<div class="vars" >
 			<var id="ELEMENT">randElement()</var>
-			<var id="NEUTRONS">randFromArray(ELEMENT.neutrons)</var>
+			<var id="NEUTRONS">randFromArray( ELEMENT.neutrons )</var>
 			<var id="MASS">ELEMENT.protons + NEUTRONS</var>
 		</div>
 
 		<div class="problems">
 			<div class="count-neutrons">
-				<p class="problems">How many neutrons in this isotope of <var>ELEMENT.fullname</var>?</p>
+				<p class="problems">How many neutrons in this isotope of <var>ELEMENT.name</var>?</p>
 				<div class="question">
 					<div class="graphie">
 						init({
@@ -38,13 +38,13 @@
 				<div class="hints">
 					<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
 					<p>The number of neutrons is equal to the atomic mass minus the atomic number</p>
-					<p>Thus, the number of neutron in this isotope of <var>ELEMENT.fullname</var> is <code><var>MASS</var> - <var>ELEMENT.protons</var> = <var>NEUTRONS</var></code>.</p>
+					<p>Thus, the number of neutron in this isotope of <var>ELEMENT.name</var> is <code><var>MASS</var> - <var>ELEMENT.protons</var> = <var>NEUTRONS</var></code>.</p>
 				</div>
 				
 			</div>
 			
 			<div class="count-protons">
-				<p class="problems">How many protons in this isotope of <var>ELEMENT.fullname</var>?</p>
+				<p class="problems">How many protons in this isotope of <var>ELEMENT.name</var>?</p>
 				<div class="question">
 					<div class="graphie">
 						init({
@@ -66,7 +66,7 @@
 			
 				<div class="hints">
 					<p>The top number is the atomic mass and the bottom number is the atomic number.</p>
-					<p>The number of protons is equal to the atomic number, thus the number of protons in this isotope of <var>ELEMENT.fullname</var> is <code><var>ELEMENT.protons</var></code>.</p>
+					<p>The number of protons is equal to the atomic number, thus the number of protons in this isotope of <var>ELEMENT.name</var> is <code><var>ELEMENT.protons</var></code>.</p>
 				</div>
 			</div>
 		</div>
