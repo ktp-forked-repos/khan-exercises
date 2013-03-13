@@ -91,14 +91,11 @@ Khan.answerTypes = $.extend(Khan.answerTypes, {
                         return true;
                     } else {
                         if (guess === guess.toLowerCase()) {
-                            return "Your answer is almost correct, but must be " +
-                                   "in capital letters.";
+                            return "Your answer is almost correct, but must be uppercase.";
                         } else if (guess === guess.toUpperCase()) {
-                            return "Your answer is almost correct, but must not " +
-                                   "be in capital letters.";
+                            return "Your answer is almost correct, but must be lowercase.";
                         } else {
-                            return "Your answer is almost correct, but must be " +
-                                   "in the correct case.";
+                            return "Your answer is almost correct, but must be in the correct case.";
                         }
                     }
                 } else {
