@@ -6,14 +6,16 @@
         <script type="text/javascript">
             function getShape(name, size) {
                 if (name === "square") {
-                    var v = [[-size, size], [size, size], [size, -size], [-size, -size], true];
+                    var s = size / 2;
+                    var v = [[-s, s], [s, s], [s, -s], [-s, -s], true];
 
                     return {
                         vertices: _.initial(v),
                         description: "a square with length " + size,
+                        hint: "\\text{area of a square} = length^2 = "+ size +"^2",
                         contains: function(point) {
-                            return (point[0] >= -size) && (point[0] <= size) &&
-                                   (point[1] >= -size) && (point[1] <= size);
+                            return (point[0] >= -s) && (point[0] <= s) &&
+                                   (point[1] >= -s) && (point[1] <= s);
                         },
                         drawShape: function(g, style) {
                             return g.path(v, style);
@@ -21,40 +23,36 @@
                         drawSize: function(g, style, inner) {
                             return {
                                 label: inner ?
-                                    g.label([0, -size - 0.5], size, "above", style) :
-                                    g.label([size, 0], size, "right", style),
+                                    g.label([0, -s], size, "above", style) :
+                                    g.label([s, 0], size, "right", style),
                                 path: inner ?
-                                    g.path([[-size, -size], [size, -size]], style) :
-                                    g.path([[ size,  size], [size, -size]], style)
+                                    g.path([[-s, -s], [s, -s]], style) :
+                                    g.path([[ s,  s], [s, -s]], style)
                             };
-                        },
-                        hint: function() {
-                            return "\\text{area of a square} = length^2 = "+ size +"^2";
                         }
                     }
                 } else if (name === "circle") {
+                    var r = Math.floor(size / 2);
                     return {
                         vertices: _.map([0, 30, 45, 60, 90, 120, 135, 150, 180,
                                          210, 225, 240, 270, 300, 315, 330, 360],
                                         function(th) {
                                             th = th * Math.PI / 180;
-                                            return [size * Math.cos(th), size * Math.sin(th)];
+                                            return [r * Math.cos(th), r * Math.sin(th)];
                                         }),
-                        description: "a circle with radius " + size,
+                        description: "a circle with radius " + r,
+                        hint: "\\text{area of a circle} = \\pi r^2 = \\pi " + r + "^2",
                         contains: function(point) {
-                            return (pow(point[0], 2) + pow(point[1], 2) <= size*size);
+                            return (pow(point[0], 2) + pow(point[1], 2) <= r*r);
                         },
                         drawShape: function(g, style) {
-                            return g.circle([0, 0], size, style);
+                            return g.circle([0, 0], r, style);
                         },
                         drawSize: function(g, style, inner) {
                             return {
-                                label: g.label(inner ? [-size/2, -0.5] : [size-1.2, -0.5], size, "above", style),
-                                path: g.path([[0, 0], inner ? [-size, 0] : [size, 0]], size, style)
+                                label: g.label(inner ? [-r/2, -1] : [r-1, -1], r, "above", style),
+                                path: g.path([[0, 0], inner ? [-r, 0] : [r, 0]], r, style)
                             };
-                        },
-                        hint: function() {
-                            return "\\text{area of a circle} = \\pi r^2 = \\pi "+size+"^2";
                         }
                     };
                 } else {
@@ -76,6 +74,7 @@
                     return {
                         description: "an equilateral with side length " + size,
                         vertices: _.initial(v),
+                        hint: "\\text{area of an equilateral triangle} = \\dfrac{\\sqrt{3}}{4}s^2 = \\dfrac{\\sqrt{3}}{4}"+s+"^2",
                         contains: function(point) {
                             var b1, b2, b3;
 
@@ -93,9 +92,6 @@
                                 label: g.label([(v[0][0] + v[1][0]) / 2, (v[0][1] + v[1][1]) / 2], s, "below", style),
                                 path: g.path([v[0], v[1]], s, style)
                             };
-                        },
-                        hint: function() {
-                            return "\\text{area of an equilateral triangle} = \\dfrac{\\sqrt{3}}{4}s^2 = \\dfrac{\\sqrt{3}}{4}"+s+"^2";
                         }
                     };
                 }
@@ -105,8 +101,9 @@
     <body>
         <div class="exercise">
             <div class="vars">
-                <var id="OUTER_SIZE">randRange(4, 11)</var>
-                <var id="INNER_SIZE">randRange(2, OUTER_SIZE - 1)</var>
+                <var id="OUTER_SIZE">randRange(6, 16)</var>
+                <var id="INNER_SIZE">randRange(4, OUTER_SIZE - 1)</var>
+                <var id="CANVAS_SIZE">OUTER_SIZE/2 + 2</var>
 
                 <var id="AREAS">{
                     "square": function(size) {
@@ -136,7 +133,10 @@
                     <div class="question">What is the area of the shaded region?</div>
                     <div class="solution" data-type="number"><var>SHADED_AREA</var></div>
                     <div class="graphie" id="shapes">
-                        var g = init({ range: [[-14, 14], [-14, 14]], scale: [11, 11] });
+                        var g = init({
+                            range: [[-CANVAS_SIZE, CANVAS_SIZE], [-CANVAS_SIZE, CANVAS_SIZE]],
+                            scale: [200 / CANVAS_SIZE, 200 / CANVAS_SIZE]
+                        });
 
                         graph.outerShape = OUTER.drawShape(g, { fill: BLUE, stroke: BLUE, "fill-opacity": 0.5 });
                         graph.innerShape = INNER.drawShape(g, { fill: "#f8f8f8", stroke: BLUE });
@@ -179,8 +179,8 @@
                         OUTER.drawShape(KhanUtil.currentGraph, { fill: BLUE, opacity: 0.5 });
                     </div>
                 </div>
-                <p><code>\text{area of whole figure} = </code><br><code>\qquad<var>OUTER.hint()</var> = <var>PRETTY_OUTER_AREA</var></code></p>
-                <p><code>\text{area of inner region} = </code><br><code>\qquad<var>INNER.hint()</var> = <var>PRETTY_INNER_AREA</var></code></p>
+                <p><code>\text{area of whole figure} = </code><br><code>\qquad<var>OUTER.hint</var> = <var>PRETTY_OUTER_AREA</var></code></p>
+                <p><code>\text{area of inner region} = </code><br><code>\qquad<var>INNER.hint</var> = <var>PRETTY_INNER_AREA</var></code></p>
                 <p>Subtract the area of the inner region from the area of the whole figure to find the area of the shaded region.</p>
                 <p><code>\text{area of shaded region} = <var>PRETTY_OUTER_AREA</var> - <var>PRETTY_INNER_AREA</var> = <var>roundTo(2, SHADED_AREA)</var></code></p>
             </div>
