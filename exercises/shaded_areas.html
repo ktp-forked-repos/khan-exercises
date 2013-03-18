@@ -6,12 +6,7 @@
     </head>
     <body>
         <div class="exercise">
-            <div class="vars" data-ensure="(INNER_AREA &lt; OUTER_AREA) &&
-                                           (_.all(INNER.vertices, OUTER.contains))">
-                <var id="SHAPES">["square", "circle", "triangle"]</var>
-
-                <var id="INNER_SHAPE">randFromArray(SHAPES)</var>
-                <var id="OUTER_SHAPE">randFromArray(SHAPES)</var>
+            <div class="vars">
 
                 <!-- need some kind of consistent size metric among shapes
                 so we can guarantee that the inner shape is enclosed -->
@@ -20,16 +15,14 @@
 
                 <var id="DRAW">{
                     square: function(x, y, size) {
-                        var s = 2*size,
-                        v = [[x - size, y + size], [x + size, y + size], [x + size, y - size],
-                             [x - size, y - size], true];
+                        var v = [[-size, size], [size, size], [size, -size], [-size, -size], true];
 
                         return {
                             name: "square",
                             vertices: _.initial(v),
                             contains: function(point) {
-                                return (point[0] &gt;= (x - size)) && (point[0] &lt;= (x + size)) &&
-                                       (point[1] &gt;= (y - size)) && (point[1] &lt;= (y + size));
+                                return (point[0] &gt;= -size) && (point[0] &lt;= size) &&
+                                       (point[1] &gt;= -size) && (point[1] &lt;= size);
                             },
                             drawShape: function(g, style) {
                                 return g.path(v, style);
@@ -37,15 +30,15 @@
                             drawSize: function(g, style, inner) {
                                 return {
                                     label: inner ?
-                                        g.label([x, y + size], s, "above", style) :
-                                        g.label([x + size, y], s, "right", style),
+                                        g.label([0, -size], size, "above", style) :
+                                        g.label([size, 0], size, "right", style),
                                     path: inner ?
-                                        g.path([[x - size, y + size], [x + size, y + size]], style) :
-                                        g.path([[x + size, y + size], [x + size, y - size]], style)
+                                        g.path([[-size, -size], [size, -size]], style) :
+                                        g.path([[ size,  size], [size, -size]], style)
                                 };
                             },
                             hint: function() {
-                                return "\\text{area of a square} = s^2 = "+s+"^2";
+                                return "\\text{area of a square} = length^2 = "+ size +"^2";
                             }
                         };
                     },
@@ -123,9 +116,6 @@
                     }
                 }</var>
 
-                <var id="OUTER">DRAW[OUTER_SHAPE](0, 0, OUTER_SIZE)</var>
-                <var id="INNER">DRAW[INNER_SHAPE](0, 0, INNER_SIZE)</var>
-
                 <var id="AREAS">{
                     "square": function(size) {
                         return [Math.pow(size * 2, 2), Math.pow(size * 2, 2)];
@@ -138,28 +128,35 @@
                     }
                 }</var>
 
-                <var id="OUTER_AREA, PRETTY_OUTER_AREA">AREAS[OUTER_SHAPE](OUTER_SIZE)</var>
-                <var id="INNER_AREA, PRETTY_INNER_AREA">AREAS[INNER_SHAPE](INNER_SIZE)</var>
+                <var id="SHAPES">["square", "circle", "triangle"]</var>
+                <var id="INNER_SHAPE">randFromArray(SHAPES)</var>
+                <var id="OUTER_SHAPE">randFromArray(SHAPES)</var>
 
-                <var id="SHADED_AREA">OUTER_AREA - INNER_AREA</var>
             </div>
 
             <div class="problems">
-                <div>
-                    <div class="problem">The diagram shows <var>an(INNER.name)</var> inside <var>an(OUTER.name)</var>.</div>
+                <div id="square-square" data-weight="1">
+                    <div class="vars">
+                        <var id="OUTER">DRAW["square"](0, 0, OUTER_SIZE)</var>
+                        <var id="INNER">DRAW["square"](0, 0, INNER_SIZE)</var>
+                        <var id="PRETTY_OUTER_AREA">OUTER_SIZE * OUTER_SIZE</var>
+                        <var id="PRETTY_INNER_AREA">INNER_SIZE * INNER_SIZE</var>
+                        <var id="SHADED_AREA">PRETTY_OUTER_AREA - PRETTY_INNER_AREA</var>
+                    </div>
+
+                    <div class="problem">The diagram shows one square inside another square.</div>
                     <div class="question">What is the area of the shaded region?</div>
-                    <div class="extra-info">(Round to the nearest hundredth.)</div>
-                    <div class="solution" data-inexact data-max-error="0.01" data-type="decimal"><var>SHADED_AREA</var></div>
+                    <div class="solution" data-type="number"><var>SHADED_AREA</var></div>
                     <div class="graphie" id="shapes">
                         var g = init({ range: [[-14, 14], [-14, 14]], scale: [11, 11] });
 
                         graph.outerShape = OUTER.drawShape(g, { fill: BLUE, stroke: BLUE, "fill-opacity": 0.5 });
                         graph.innerShape = INNER.drawShape(g, { fill: "#f8f8f8", stroke: BLUE });
-
                         graph.outerSize = OUTER.drawSize(g, { stroke: BLUE, opacity: 1 });
                         graph.innerSize = INNER.drawSize(g, { stroke: ORANGE, opacity: 1 }, true);
                     </div>
                 </div>
+
             </div>
 
             <div class="hints">
@@ -171,7 +168,7 @@
                 </div>
                 <p><code>\text{area of whole figure} = </code><br><code>\qquad<var>OUTER.hint()</var> = <var>PRETTY_OUTER_AREA</var></code></p>
                 <p><code>\text{area of inner region} = </code><br><code>\qquad<var>INNER.hint()</var> = <var>PRETTY_INNER_AREA</var></code></p>
-                <p>Then subtract the inner region's area from the whole figure's area to find the area of the shaded region (the difference between the two areas).</p>
+                <p>Subtract the area of the inner region from the area of the whole figure to find the area of the shaded region.</p>
                 <p><code>\text{area of shaded region} = <var>PRETTY_OUTER_AREA</var> - <var>PRETTY_INNER_AREA</var> = <var>roundTo(2, SHADED_AREA)</var></code></p>
             </div>
         </div>
