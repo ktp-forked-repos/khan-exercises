@@ -43,13 +43,81 @@
                     <var id="NUM">randRange( 5, 15 )</var>
                 </div>
                 <p class="spin">A baker has a whole {baguette|loaf of bread}.</p>
-                <p class="question spin">How many cuts must {he|she} make to have exactly <var>NUM</var> even slices?</p>
+                <p class="question spin">How many cuts must <var>he(1)</var> make to have exactly <var>NUM</var> slices?</p>
                 <div class="solution" data-type="multiple">
                     <p><span class="sol" data-forms="integer"><var>NUM -1</var></span> cuts</p>
                 </div>
                 <div class="hints">
-                    <p>One cut will make two slices, two cuts will make three slices, and so on.</p>
-                    <p>Therefore, we need <var>NUM - 1</var> cuts to make <var>NUM</var> slices.</p>
+                    <div>
+                        <div class="graphie" id="bread">
+                            init({
+                                range: [[-23, 23], [-4, 6]],
+                                scale: 10
+                            });
+
+                            style({
+                                fill: '#f8f8f8', stroke: '#BA7D5E'
+                            });
+
+                            path([[-20, -2.5], [20, -2.5]]);
+                            path([[-15, 2.5], [15, 2.5]]);
+                            arc([-15, -2.5], 5, 90, 180, 0);
+                            arc([15, -2.5], 5, 0, 90, 0);
+
+                            style({
+                                stroke: BLUE,
+                                "stroke-dasharray": "-"
+                            });
+                            graph.cut =  path([[0, -3], [0, 3]]);
+                            graph.cutN = label([0, 2.5], "1", "above", {color: BLUE});
+                            graph.slice1 = label([-10, 0], "slice \\space1", "center");
+                            graph.slice2 = label([10, 0], "slice \\space2", "center");
+
+                        </div>
+                        <p>One cut will make two slices.</p>
+                    </div>
+
+                    <div>
+                        <div class="graphie" data-update="bread">
+                            graph.cut.remove();
+                            graph.cutN.remove();
+                            graph.slice1.remove();
+                            graph.slice2.remove();
+
+                            graph.cut1 =  path([[-6, -3], [-6, 3]]);
+                            graph.cut2 =  path([[ 6, -3], [ 6, 3]]);
+                            graph.cutN1 = label([-6, 2.5], "1", "above", {color: BLUE});
+                            graph.cutN2 = label([ 6, 2.5], "2", "above", {color: BLUE});
+                            graph.slice1 = label([-13, 0], "slice \\space1", "center");
+                            graph.slice2 = label([0, 0], "slice \\space2", "center");
+                            graph.slice3 = label([13, 0], "slice \\space3", "center");
+                        </div>
+                        <p>Two cuts will make three slices, and so on.</p>
+                    </div>
+
+                    <div>
+                        <div class="graphie" data-update="bread">
+                            graph.cut1.remove();
+                            graph.cut2.remove();
+                            graph.cutN1.remove();
+                            graph.cutN2.remove();
+                            graph.slice1.remove();
+                            graph.slice2.remove();
+                            graph.slice3.remove();
+
+                            var slice = Math.round(38 / NUM);
+                            var dx = 19 - slice * NUM/2;
+                            for (var i=0; i &lt; NUM; i++) {
+                                var x = i * slice - 19 + dx;
+                                if (i !== 0) {
+                                    label([x, 2.5], i, "above", {color: BLUE});
+                                    path([[x, -3], [x, 3]]);
+                                }
+                                label([x + slice/2, -1], i+1, "center");
+                            }
+                        </div>
+                        <p>Therefore, <var>he(1)</var> needs <var>NUM - 1</var> cuts to make <var>NUM</var> slices.</p>
+                    </div>
                 </div>
             </div>
             <div id="fences">
