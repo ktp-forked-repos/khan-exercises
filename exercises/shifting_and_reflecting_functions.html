@@ -8,15 +8,15 @@
 <body>
     <div class="exercise">
         <div class="vars">
-            <var id="X_ORIG">randRange( -8, 8 )</var>
-            <var id="Y_ORIG">randRange( -8, 8 )</var>
-            <var id="UP_ORIG">abs ( Y_ORIG ) &lt; 5 ? randRangeNonZero( -1, 1 ) : -abs ( Y_ORIG )/ Y_ORIG</var>
+            <var id="X_ORIG">randRange(-8, 8)</var>
+            <var id="Y_ORIG">randRange(-8, 8)</var>
+            <var id="UP_ORIG">abs (Y_ORIG) &lt; 5 ? randRangeNonZero(-1, 1) : -abs (Y_ORIG) / Y_ORIG</var>
         </div>
 
         <div class="problems">
             <div id="shift-x">
                 <div class="vars">
-                    <var id="X_SHIFT">X_ORIG &gt; 0 ? randRange( -6, -1 ) : randRange( 1, 6 )</var>
+                    <var id="X_SHIFT">X_ORIG &gt; 0 ? randRange(-6, -1) : randRange(1, 6)</var>
                     <var id="FLIP">1</var>
                     <var id="Y_SHIFT">0</var>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="vars">
                     <var id="X_SHIFT">0</var>
                     <var id="FLIP">1</var>
-                    <var id="Y_SHIFT" data-ensure="abs (Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero( -6 , 6 )</var>
+                    <var id="Y_SHIFT" data-ensure="abs(Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero(-6 , 6)</var>
                 </div>
 
                 <ul class="choices" data-none="true" data-show="5">
@@ -46,9 +46,9 @@
 
             <div id="change-all">
                 <div class="vars">
-                    <var id="X_SHIFT">X_ORIG &gt; 0 ? randRange( -6, -1 ) : randRange( 1, 6 )</var>
+                    <var id="X_SHIFT">X_ORIG &gt; 0 ? randRange(-6, -1) : randRange(1, 6)</var>
                     <var id="FLIP">randRangeNonZero(-1, 1)</var>
-                    <var id="Y_SHIFT" data-ensure="abs (Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero( -6 , 6 )</var>
+                    <var id="Y_SHIFT" data-ensure="abs(Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero( -6 , 6 )</var>
                 </div>
 
                 <ul class="choices" data-none="true" data-show="6">
@@ -153,7 +153,7 @@
                         strokeDasharray: ""
                     });
 
-                    path([ [ -X_ORIG, FLIP * Y_ORIG + Y_SHIFT ], [ -X_ORIG - X_SHIFT , FLIP * Y_ORIG + Y_SHIFT] ]);
+                    path([[-X_ORIG, FLIP * Y_ORIG + Y_SHIFT ], [-X_ORIG - X_SHIFT , FLIP * Y_ORIG + Y_SHIFT] ]);
                 </div>
             </div>
 
