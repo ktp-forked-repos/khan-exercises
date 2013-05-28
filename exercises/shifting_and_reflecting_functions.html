@@ -11,6 +11,10 @@
             <var id="X_ORIG">randRange(-8, 8)</var>
             <var id="Y_ORIG">randRange(-8, 8)</var>
             <var id="UP_ORIG">abs (Y_ORIG) &lt; 5 ? randRangeNonZero(-1, 1) : -abs (Y_ORIG) / Y_ORIG</var>
+            <var id="FUNC">randFromArray([
+                function(x) { return UP_ORIG * pow(x + X_ORIG, 2) + Y_ORIG; },
+                function(x) { return 0.25 * UP_ORIG * pow(x + X_ORIG, 3) + Y_ORIG; }
+            ])</var>
         </div>
 
         <div class="problems">
@@ -48,7 +52,7 @@
                 <div class="vars">
                     <var id="X_SHIFT">X_ORIG &gt; 0 ? randRange(-6, -1) : randRange(1, 6)</var>
                     <var id="FLIP">randRangeNonZero(-1, 1)</var>
-                    <var id="Y_SHIFT" data-ensure="abs(Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero( -6 , 6 )</var>
+                    <var id="Y_SHIFT" data-ensure="abs(Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero(-6 , 6)</var>
                 </div>
 
                 <ul class="choices" data-none="true" data-show="6">
@@ -83,16 +87,16 @@
                 arrows: null
             });
 
-            plot( function( x ) {
-                return UP_ORIG * pow(( x + X_ORIG), 2 ) + Y_ORIG;
+            plot(function(x) {
+                return FUNC(x);
             }, [-10, 10]);
 
             style({
                 stroke: "blue"
             });
 
-            plot( function( x ) {
-                return FLIP * UP_ORIG * pow(( x + X_ORIG + X_SHIFT), 2 ) + FLIP * Y_ORIG + Y_SHIFT;
+            plot(function(x) {
+                return FLIP * FUNC(x + X_SHIFT) + Y_SHIFT;
             }, [-10, 10]);
         </div>
 
@@ -106,8 +110,8 @@
                     style({
                         stroke: "purple"
                     });
-                    plot( function( x ) {
-                        return FLIP * UP_ORIG * pow(( x + X_ORIG ), 2 ) - Y_ORIG;
+                    plot(function(x) {
+                        return FLIP * FUNC(x);
                     }, [-10, 10]);
                 </div>
             </div>
@@ -123,8 +127,8 @@
                         strokeDasharray: "- "
                     });
 
-                    plot( function( x ) {
-                        return FLIP * UP_ORIG * pow(( x + X_ORIG ), 2 ) + FLIP * Y_ORIG + Y_SHIFT;
+                    plot(function(x) {
+                        return FLIP * FUNC(x) + Y_SHIFT;
                     }, [-10, 10]); strokeDasharray: "- "
 
                     style({
@@ -132,13 +136,13 @@
                         strokeDasharray: ""
                     });
 
-                    path([ [-X_ORIG, FLIP * Y_ORIG], [-X_ORIG, FLIP * Y_ORIG + Y_SHIFT] ]);
+                    path([[-X_ORIG, FLIP * Y_ORIG], [-X_ORIG, FLIP * Y_ORIG + Y_SHIFT]]);
                 </div>
             </div>
 
             <div data-if="X_SHIFT !== 0">
-                <p><code> \qquad \color{blue}{g(<var>-X_ORIG - X_SHIFT</var>)} = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
-                <p><code> \qquad <var>expr(["+",["*", FLIP, "f(" + (-X_ORIG) + ")"], Y_SHIFT])</var> = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
+                <p><code>\qquad \color{blue}{g(<var>-X_ORIG - X_SHIFT</var>)} = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
+                <p><code>\qquad <var>expr(["+",["*", FLIP, "f(" + (-X_ORIG) + ")"], Y_SHIFT])</var> = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
                 
                 <p>Therefore shift the function <var>(X_SHIFT &gt; 0 ? "left " : "right ") + abs(X_SHIFT)</var> <var>(abs(X_SHIFT) === 1 ? "unit" : "units")</var>:</p>
                 <p><code>\color{blue}{g(x)} = <var>expr(["+",["*", FLIP, ["*", "f", ["+", "x", X_SHIFT]]], Y_SHIFT])</var></code></p>
@@ -153,11 +157,11 @@
                         strokeDasharray: ""
                     });
 
-                    path([[-X_ORIG, FLIP * Y_ORIG + Y_SHIFT ], [-X_ORIG - X_SHIFT , FLIP * Y_ORIG + Y_SHIFT] ]);
+                    path([[-X_ORIG, FLIP * Y_ORIG + Y_SHIFT ], [-X_ORIG - X_SHIFT, FLIP * Y_ORIG + Y_SHIFT]]);
                 </div>
             </div>
 
-            <p>Therefore <code>g(x)</code> = <code><var>expr(["+",["*", FLIP, ["*", "f", ["+", "x", X_SHIFT]]], Y_SHIFT])</var></code>.</p>
+            <p>Therefore <code>g(x) = <var>expr(["+",["*", FLIP, ["*", "f", ["+", "x", X_SHIFT]]], Y_SHIFT])</var></code>.</p>
         </div>
     </div>
 </body></html>
