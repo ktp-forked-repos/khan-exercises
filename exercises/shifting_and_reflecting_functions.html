@@ -51,11 +51,14 @@
                     <var id="Y_SHIFT" data-ensure="abs (Y_ORIG * FLIP + Y_SHIFT) &lt; 9 &amp;&amp; (Y_ORIG * FLIP + Y_SHIFT) * UP_ORIG * FLIP &lt; 7">randRangeNonZero( -6 , 6 )</var>
                 </div>
 
-                <ul class="choices" data-none="true" data-show="5">
-                    <li><code><var>expr(["+",["*", FLIP, ["*", "f", ["+","x", X_SHIFT]]], -Y_SHIFT])</var></code></li>
-                    <li><code><var>expr(["+",["*", FLIP, ["*", "f", ["+","x", -X_SHIFT]]], Y_SHIFT])</var></code></li>
-                    <li><code><var>expr(["+",["*", -FLIP, ["*", "f", ["+","x", X_SHIFT]]], Y_SHIFT])</var></code></li>
-                    <li><code><var>expr(["+",["*", FLIP, ["*", "f", ["+","x", -X_SHIFT]]], -Y_SHIFT])</var></code></li>
+                <ul class="choices" data-none="true" data-show="6">
+                    <li><code><var>expr(["+",["*", FLIP, ["*", "f", ["+","x",   X_SHIFT]]], -Y_SHIFT])</var></code></li>
+                    <li><code><var>expr(["+",["*", FLIP, ["*", "f", ["+","x",  -X_SHIFT]]],  Y_SHIFT])</var></code></li>
+                    <li><code><var>expr(["+",["*", FLIP, ["*", "f", ["+","x",  -X_SHIFT]]], -Y_SHIFT])</var></code></li>
+                    <li><code><var>expr(["+",["*", -FLIP, ["*", "f", ["+","x",  X_SHIFT]]],  Y_SHIFT])</var></code></li>
+                    <li><code><var>expr(["+",["*", -FLIP, ["*", "f", ["+","x", -X_SHIFT]]],  Y_SHIFT])</var></code></li>
+                    <li><code><var>expr(["+",["*", -FLIP, ["*", "f", ["+","x",  X_SHIFT]]], -Y_SHIFT])</var></code></li>
+                    <li><code><var>expr(["+",["*", -FLIP, ["*", "f", ["+","x", -X_SHIFT]]], -Y_SHIFT])</var></code></li>
                 </ul>
             </div>
         </div>
