@@ -12,8 +12,8 @@
             <var id="Y_ORIG">randRange(-8, 8)</var>
             <var id="UP_ORIG">abs (Y_ORIG) &lt; 5 ? randRangeNonZero(-1, 1) : -abs (Y_ORIG) / Y_ORIG</var>
             <var id="FUNC">randFromArray([
-                function(x) { return UP_ORIG * pow(x + X_ORIG, 2) + Y_ORIG; },
-                function(x) { return 0.25 * UP_ORIG * pow(x + X_ORIG, 3) + Y_ORIG; }
+                function(x) { return 0.5 * UP_ORIG * pow(x + X_ORIG, 2) + Y_ORIG; },
+                function(x) { return 0.2 * UP_ORIG * pow(x + X_ORIG, 3) + Y_ORIG; }
             ])</var>
         </div>
 
@@ -117,7 +117,8 @@
             </div>
 
             <div data-if="Y_SHIFT !== 0">
-                <p>Shift the function <code>-f(x)</code> <var>(Y_SHIFT &gt; 0 ? "up " : "down ") + abs(Y_SHIFT)</var> <var>(abs(Y_SHIFT) === 1 ? "unit" : "units")</var>, giving <code class="hint_green"><var>expr(["+",["*", FLIP,"f(x)"], Y_SHIFT])</var></code>.</p>
+                <p><code>g(x)</code> is shifted <var>abs(Y_SHIFT) (abs(Y_SHIFT) === 1 ? "unit" : "units")</var>
+                 Shift the function <code>f(x)</code> <var>(Y_SHIFT &gt; 0 ? "up " : "down ") + abs(Y_SHIFT)</var> <var>(abs(Y_SHIFT) === 1 ? "unit" : "units")</var>, giving <code class="hint_green"><var>expr(["+",["*", FLIP,"f(x)"], Y_SHIFT])</var></code>.</p>
 
                 <div class="graphie" data-update="G">
                     style({
@@ -141,13 +142,13 @@
             </div>
 
             <div data-if="X_SHIFT !== 0">
-                <p><code>\qquad \color{blue}{g(<var>-X_ORIG - X_SHIFT</var>)} = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
+                <p><code>\qquad g(<var>-X_ORIG - X_SHIFT</var>) = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
                 <p><code>\qquad <var>expr(["+",["*", FLIP, "f(" + (-X_ORIG) + ")"], Y_SHIFT])</var> = <var>FLIP * Y_ORIG + Y_SHIFT</var></code></p>
                 
                 <p>Therefore shift the function <var>(X_SHIFT &gt; 0 ? "left " : "right ") + abs(X_SHIFT)</var> <var>(abs(X_SHIFT) === 1 ? "unit" : "units")</var>:</p>
-                <p><code>\color{blue}{g(x)} = <var>expr(["+",["*", FLIP, ["*", "f", ["+", "x", X_SHIFT]]], Y_SHIFT])</var></code></p>
+                <p><code>g(x) = <var>expr(["+",["*", FLIP, ["*", "f", ["+", "x", X_SHIFT]]], Y_SHIFT])</var></code></p>
 
-                <p>Shift the function <code></code> <var>(X_SHIFT &gt; 0 ? "left " : "right ") + abs(X_SHIFT)</var> <var>(abs(X_SHIFT) === 1 ? "unit" : "units")</var>, giving <code class="hint_blue"><var>expr(["+",["*", FLIP, ["*", "f", ["+","x", X_SHIFT]]], Y_SHIFT])</var></code>.</p>
+                <p>Shift the function <var>(X_SHIFT &gt; 0 ? "left " : "right ") + abs(X_SHIFT)</var> <var>(abs(X_SHIFT) === 1 ? "unit" : "units")</var>, giving <code class="hint_blue"><var>expr(["+",["*", FLIP, ["*", "f", ["+","x", X_SHIFT]]], Y_SHIFT])</var></code>.</p>
 
                 <div class="graphie" data-update="G">
                     style({
